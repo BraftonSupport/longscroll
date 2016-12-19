@@ -4,10 +4,10 @@ Author: Yvonne Tse
 URL: http://yvonnetse.com/
 Version: Yvonne's Theme 1.0
 */
-
-include '/inc/themesettings.php';
-include '/inc/themewidgets.php';
-include '/inc/template-tags.php';
+define("yvonne", dirname(__FILE__));
+include yvonne.'/inc/themesettings.php';
+include yvonne.'/inc/themewidgets.php';
+include yvonne.'/inc/template-tags.php';
 
 /**
  * Yvonne's Theme only works in WordPress 4.4 or later.
@@ -552,7 +552,7 @@ function team_shortcode() {
 	$loop = new WP_Query( $args );
 	if ( $loop->have_posts() ) :
 	while ( $loop->have_posts() ) : $loop->the_post();
-		echo "<div class='container'>";
+		echo "<div class='container team'>";
 		$left = get_post_meta( get_the_ID(), 'left_box', true );
 		$right = get_post_meta( get_the_ID(), 'right_box', true );
 

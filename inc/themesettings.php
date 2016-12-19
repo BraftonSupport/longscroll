@@ -103,7 +103,7 @@ function third_shortcode( $atts , $content = null ) {
 			if ( !empty( $a['padding'] ) ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
 			}
-		if ( !empty( $a['bg-color'] || $a['color'] || $a['bg-image'] || $a['padding'] ) ) {
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
 			$html.= '"';
 		}
 		$html.= '>' . do_shortcode($content) . '</div>';
@@ -133,7 +133,7 @@ function fourth_shortcode( $atts , $content = null ) {
 			if ( !empty( $a['padding'] ) ) {
 				$html.= 'padding:'. esc_attr($a['padding']).';';
 			}
-		if ( !empty( $a['bg-color'] || $a['color'] || $a['bg-image'] || $a['padding'] ) ) {
+		if ( !empty( $a['bg-color'] ) || !empty( $a['color'] ) || !empty( $a['bg-image'] ) || !empty( $a['padding'] ) ) {
 			$html.= '"';
 		}
 		$html.= '>' . do_shortcode($content) . '</div>';
@@ -157,6 +157,8 @@ function yttheme_register_buttons( $buttons ) {
 /* Adding More Options to the Wordpress Theme Customizer.
 -----------------------------------------------------------------*/
 
+/* Adding the logo to the settings page*/
+
 function yttheme_site_options( $wp_customize ) {
 	$wp_customize->add_setting( 'yttheme_logo' );
 
@@ -169,6 +171,13 @@ function yttheme_site_options( $wp_customize ) {
 
 add_action('customize_register', 'yttheme_site_options');
 
+/* Logo size */
+
+function yttheme_get_image_id($image_url) {
+	global $wpdb;
+	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url )); 
+        return $attachment[0]; 
+}
 
 /* Enqueuing STUFF!
 -----------------------------------------------------------------*/
@@ -188,7 +197,7 @@ add_action( 'admin_menu', 'yttheme_admin' );
 
 function yttheme_admin() {
     /* Base Menu */
-    add_submenu_page('themes.php', "Yvonne's Theme", "Yvonne's Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
+    add_theme_page("Yvonnes Theme", "Yvonnes Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
 }
 
 /* OPTION PAGE SETTINGS 

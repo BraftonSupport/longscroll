@@ -40,7 +40,7 @@ if ( $options['ga'] ) : ?>
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="site">
+	<div id="page" class="site">
 		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'yttheme' ); ?></a>
 
 		<header id="masthead" class="site-header" role="banner">
@@ -50,11 +50,23 @@ if ( $options['ga'] ) : ?>
 
 						<?php if ( get_theme_mod( 'yttheme_logo' ) ) { ?>
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-								<img src='<?php echo esc_url( get_theme_mod( 'yttheme_logo' ) ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' class="site-title">
+								<?php
+								// set the image url
+								$image_url = esc_url( get_theme_mod( 'yttheme_logo' ) );
+								 
+								// store the image ID in a var
+								$image_id = yttheme_get_image_id($image_url);
+								 
+								// retrieve the thumbnail size of our image
+								$image_thumb = wp_get_attachment_image_src($image_id, 'medium'); ?>
+
+								<img src='<?php echo $image_thumb[0]; ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' class="site-title">
+								<?php if ( has_site_icon() ){ ?>
+									<img src='<?php echo get_site_icon_url( 32 ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' class="site-icon">
+								<?php } ?>
 							</a>
 						<?php } else { ?>
 							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-							<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 						<?php }
 
 						$description = get_bloginfo( 'description', 'display' );
@@ -102,7 +114,7 @@ if ( $options['ga'] ) : ?>
 							</nav><!-- .main-navigation -->
 						<?php endif; ?>
 					</div><!-- .site-header-menu -->
-				<?php if ($options['nav'] == 'next') { echo '</div>'; } ?>
+				<?php //if ($options['nav'] == 'below') { echo '</div>'; } ?>
 				<?php if ($options['nav'] == 'next') { echo '</div></div>'; } ?>
 			</div><!-- .site-header-main -->
 		</header>

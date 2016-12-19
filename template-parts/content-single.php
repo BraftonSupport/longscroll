@@ -53,7 +53,7 @@ $options = get_option( 'yttheme_options' );
 	</footer><!-- .entry-footer -->
 
 <?php if ( is_single() && $options['related_posts']=="below" ) { ?>
-	<div class="latest container">
+	<div class="latest">
 		<h3>Related Posts</h3>
 		<div class="post">
 

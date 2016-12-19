@@ -43,7 +43,7 @@ get_header(); ?>
 			// End of the loop.
 		endwhile;
 		?>
-
+		<br class="clear"/>
 	</main><!-- .site-main -->
 <?php get_sidebar(); ?>
 
