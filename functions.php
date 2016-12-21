@@ -215,6 +215,11 @@ function yttheme_enqueuingallthethings() {
 
 	wp_enqueue_script( 'yttheme-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20151204', true );
 
+	wp_enqueue_script( 'teamajax', get_template_directory_uri() . '/js/teamajax.js', array('jquery') );
+
+    wp_localize_script( 'teamajax', 'team_ajax_object',
+            array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+
 	wp_localize_script( 'yttheme-script', 'screenReaderText', array(
 		'expand'   => __( 'expand child menu', 'yttheme' ),
 		'collapse' => __( 'collapse child menu', 'yttheme' ),
@@ -476,34 +481,6 @@ function save_bg_meta_box($post_id, $post, $update)
 	update_post_meta($post_id, "bgvideo", $bgvideo_value);
 }
 
-
-// Team member post type
-add_action( 'init', 'create_team_posttype' );
-function create_team_posttype() {
-	register_post_type( 'team',
-		array(
-			'labels' => array(
-			'name' => __( 'Instruments' ),
-			'singular_name' => __( 'Phenomenon' ),
-			'add_new' => __( 'Add New Situation'),
-			'add_new_item' => __( 'Add New Concern'),
-			'edit_item' => __( 'Edit Everything' ),
-			'new_item' => __( 'New Stuff'),
-			'view_item' => __( 'View Apparatus'),
-			'search_items' => __( 'Search Things'),
-			'all_items' => __( 'All Devices')
-			),
-		'menu_icon' => 'dashicons-groups',
-		'hierarchical'  => false,
-		'public' => true,
-		'has_archive' => true,
-		'rewrite' => array('slug' => 'team'),
-		'supports' => array( 'title', 'editor', 'revisions', 'thumbnail', 'custom-fields' ),
-		'register_meta_box_cb' => 'add_more_boxes'
-		)
-	);
-}
-
 /* the boxes on the team part of the front page, idk */
 
 function boxes_markup($object) {
@@ -545,14 +522,45 @@ function save_boxes($post_id, $post, $update){
 	update_post_meta($post_id, "left_box", $left);
 }
 
-/* HOLY MOLY the team shortcode (remember there should be a if no posts thing)*/
+
+// Team member post type
+add_action( 'init', 'create_team_posttype' );
+function create_team_posttype() {
+	register_post_type( 'team',
+		array(
+			'labels' => array(
+			'name' => __( 'Instruments' ),
+			'singular_name' => __( 'Phenomenon' ),
+			'add_new' => __( 'Add New Situation'),
+			'add_new_item' => __( 'Add New Concern'),
+			'edit_item' => __( 'Edit Everything' ),
+			'new_item' => __( 'New Stuff'),
+			'view_item' => __( 'View Apparatus'),
+			'search_items' => __( 'Search Things'),
+			'all_items' => __( 'All Devices')
+			),
+		'menu_icon' => 'dashicons-groups',
+		'hierarchical'  => false,
+		'public' => true,
+		'has_archive' => true,
+		'rewrite' => array('slug' => 'team'),
+		'supports' => array( 'title', 'editor', 'revisions', 'thumbnail', 'custom-fields' ),
+		'register_meta_box_cb' => 'add_more_boxes'
+		)
+	);
+}
+
+/* the team shortcode */
 
 function team_shortcode() {
 	$args = array( 'post_type' => 'team', 'posts_per_page' => 1 );
 	$loop = new WP_Query( $args );
 	if ( $loop->have_posts() ) :
 	while ( $loop->have_posts() ) : $loop->the_post();
-		echo "<div class='container team'>";
+		echo '<div class="container team post-';
+		echo the_ID();
+		echo '">';
+		$post = get_post($_POST['id']);
 		$left = get_post_meta( get_the_ID(), 'left_box', true );
 		$right = get_post_meta( get_the_ID(), 'right_box', true );
 
@@ -561,17 +569,29 @@ function team_shortcode() {
 			echo the_title('<h3>', '</h3>');
 			echo $left.'</div>';
 		} else {
-			echo '<div class="left">'.the_title('<h3>', '</h3>').'</div>';
+			echo '<div class="teamleft">'.the_title('<h3>', '</h3>').'</div>';
 		}
-		if ( has_post_thumbnail() ) {
-			echo '<div class="teammiddle"><a href="" class="button"><i class="fa fa-chevron-left" aria-hidden="true"></i></a><div class="round">';
-			the_post_thumbnail( 'team' );
-			echo '</div><a href="" class="button"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></div>';
-		}
+
+		echo '<div class="teammiddle"><a class="previous button" ';
+		$prev_post = get_previous_post();
+			if (!empty( $prev_post )){ echo ' data-postid="'. $prev_post->ID .'"'; }
+		echo '><i class="fa fa-chevron-left" aria-hidden="true"></i></a><div class="round">';
+			if ( has_post_thumbnail() ) {
+				the_post_thumbnail( 'team' );
+			}
+		echo '</div><a class="next button"';
+		$next_post = get_next_post();
+			if (!empty( $next_post )){ echo ' data-postid="'. $next_post->ID .'"'; }
+		echo '><i class="fa fa-chevron-right" aria-hidden="true"></i></a></div>';
+
 		if ( ! empty( $right ) ) {
 			echo '<div class="teamright">'.$right.'</div>';
+		} else {
+			echo '<div class="teamright">';
+			the_excerpt();
+			echo '</div>';
 		}
-		echo "</div>";
+		echo '</div>';
 	endwhile;
 	else :
 		get_template_part( 'template-parts/content', 'none' );
@@ -581,3 +601,31 @@ function team_shortcode() {
 add_shortcode('team', 'team_shortcode');
 
 add_image_size( 'team', 250, 250, array( 'center', 'center' ) );
+
+
+
+
+/* fucking around with ajax */
+
+function team_ajax_request() {
+ 
+    // The $_REQUEST contains all the data sent via ajax
+    if ( isset($_REQUEST) ) {
+     
+        $ID = $_REQUEST['teampostid'];
+         
+        // Let's take the data that was sent and do something with it
+        if ( isset($ID) ) {
+            echo get_the_title( $ID );
+            echo get_the_post_thumbnail( $ID );
+            echo get_post_meta( $ID, 'left_box', true );
+            echo get_post_meta( $ID, 'right_box', true );
+			echo apply_filters('the_content', get_post($ID)->post_content);
+        }
+    }
+     
+    // Always die in functions echoing ajax content
+   die();
+}
+add_action( 'wp_ajax_team_ajax_request', 'team_ajax_request' );
+add_action( 'wp_ajax_nopriv_team_ajax_request', 'team_ajax_request' );

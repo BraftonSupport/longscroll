@@ -575,6 +575,11 @@ input {
 }
 
 .button,
+button {
+	cursor: pointer;
+}
+
+.button,
 button,
 button[disabled]:hover,
 button[disabled]:focus,
@@ -1746,17 +1751,17 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
 
 .teamleft,.teamright { width: 32%; }
 
-.teammiddle .button:first-of-type {
+.teammiddle .previous.button {
 	margin-right: -40px;
 }
-.teammiddle .button:first-of-type i {
+.teammiddle .previous.button i {
 	position: relative;
 	right: 17px;
 }
-.teammiddle .button:nth-of-type(2) {
+.teammiddle .next.button {
 	margin-left: -40px;
 }
-.teammiddle .button:nth-of-type(2) i {
+.teammiddle .next.button i {
 	position: relative;
 	left: 17px;
 }
@@ -3971,8 +3976,8 @@ p > video {
 	.teamleft, .teamright { width: 28%; }
 	.teammiddle { width: 44%; }
 	.teammiddle .button { padding: 25px 27px; }
-	.teammiddle .button:first-of-type i { right: 20px; }
-	.teammiddle .button:nth-of-type(2) i { left: 20px; }
+	.teammiddle .previous.button i { right: 20px; }
+	.teammiddle .next.button i { left: 20px; }
 }
 
 @media (max-width: 768px) {
@@ -4034,6 +4039,7 @@ p > video {
 	.site-header-main.scrolled .menu-toggle { float: right; margin-top: 5px; }
 	.teammiddle img { width: 200px; }
 	.nav-links { display: block; }
+	.site-main > article.simple { width: 100%; margin-right: 0; float: none; }
 
 }
 
