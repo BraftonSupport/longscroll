@@ -7,7 +7,6 @@ jQuery(document).ready(function($){
   	$(this).attr('href', string);
   })
 
-
   // smooth scroll
   $('a[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -15,7 +14,7 @@ jQuery(document).ready(function($){
       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
       if (target.length) {
         $('html, body').animate({
-          scrollTop: target.offset().top
+          scrollTop: (target.offset().top)-200
         }, 1000);
         return false;
       }
@@ -29,4 +28,30 @@ jQuery(document).ready(function($){
   }
   $( ".teammiddle img" ).css("border-color", bg);
 
+  $( ".team .container:first-of-type").removeClass('hide');
+  $(".fa-spinner").fadeTo( "fast", 1 ).delay(100).fadeTo( "fast", 0 );
+
+  $( ".team .container:not(:first-of-type) .previous.button" ).click( function() {
+    $(".fa-spinner").fadeTo( "fast", 1 ).delay(100).fadeTo( "fast", 0 );
+    $(this).parents(".container").addClass('hide');
+    $(this).parents(".container").prev().removeClass('hide');
+    // $(".fa-spinner")
+    //   .delay(800).fadeTo(0); 
+      // .queue(function (next) { 
+      //   $(this)
+      //   next(); 
+      // });
+  });
+
+  $( ".team .container:not(:last-of-type) .next.button" ).click( function() {
+    $(".fa-spinner").fadeTo( "fast", 1 ).delay(100).fadeTo( "fast", 0 );
+    $(this).parents(".container").addClass('hide');
+    $(this).parents(".container").next().removeClass('hide');
+    // $(".fa-spinner")
+      
+      // .queue(function (next) { 
+      //   $(this)
+      //   next(); 
+      // });
+  });
 });

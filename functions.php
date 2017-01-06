@@ -185,11 +185,11 @@ function yttheme_enqueuingallthethings() {
 	wp_enqueue_style( 'font-awesome.min', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 
 	// Theme stylesheet.
-	wp_enqueue_style( 'yttheme-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'yttheme-style', get_template_directory_uri() . '/style.css' );
 
 	// Featherlight
-	wp_enqueue_style( 'featherlight', get_stylesheet_directory_uri() . '/js/featherlight.css' );
-	wp_enqueue_script( 'featherlight.js', get_stylesheet_directory_uri() . '/js/featherlight.js');
+	wp_enqueue_style( 'featherlight', get_template_directory_uri() . '/js/featherlight.css' );
+	wp_enqueue_script( 'featherlight.js', get_template_directory_uri() . '/js/featherlight.js');
 
 	// Load the Internet Explorer specific stylesheet.
 	wp_enqueue_style( 'yttheme-ie', get_template_directory_uri() . '/css/ie.css', array( 'yttheme-style' ), '20150930' );
@@ -214,11 +214,6 @@ function yttheme_enqueuingallthethings() {
 	}
 
 	wp_enqueue_script( 'yttheme-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20151204', true );
-
-	wp_enqueue_script( 'teamajax', get_template_directory_uri() . '/js/teamajax.js', array('jquery') );
-
-    wp_localize_script( 'teamajax', 'team_ajax_object',
-            array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
 	wp_localize_script( 'yttheme-script', 'screenReaderText', array(
 		'expand'   => __( 'expand child menu', 'yttheme' ),
@@ -544,7 +539,7 @@ function create_team_posttype() {
 		'public' => true,
 		'has_archive' => true,
 		'rewrite' => array('slug' => 'team'),
-		'supports' => array( 'title', 'editor', 'revisions', 'thumbnail', 'custom-fields' ),
+		'supports' => array( 'title', 'revisions', 'thumbnail', 'custom-fields' ),
 		'register_meta_box_cb' => 'add_more_boxes'
 		)
 	);
@@ -553,43 +548,32 @@ function create_team_posttype() {
 /* the team shortcode */
 
 function team_shortcode() {
-	$args = array( 'post_type' => 'team', 'posts_per_page' => 1 );
+	echo '<div class="team">';
+	$args = array( 'post_type' => 'team', 'posts_per_page' => -1 );
 	$loop = new WP_Query( $args );
 	if ( $loop->have_posts() ) :
 	while ( $loop->have_posts() ) : $loop->the_post();
-		echo '<div class="container team post-';
-		echo the_ID();
-		echo '">';
+		echo '<div class="container hide">';
 		$post = get_post($_POST['id']);
 		$left = get_post_meta( get_the_ID(), 'left_box', true );
 		$right = get_post_meta( get_the_ID(), 'right_box', true );
 
+		echo '<div class="teamleft">';
+		echo the_title('<h3>', '</h3>');
 		if ( ! empty( $left ) ) {
-			echo '<div class="teamleft">';
-			echo the_title('<h3>', '</h3>');
-			echo $left.'</div>';
-		} else {
-			echo '<div class="teamleft">'.the_title('<h3>', '</h3>').'</div>';
+			echo $left;
 		}
-
-		echo '<div class="teammiddle"><a class="previous button" ';
-		$prev_post = get_previous_post();
-			if (!empty( $prev_post )){ echo ' data-postid="'. $prev_post->ID .'"'; }
-		echo '><i class="fa fa-chevron-left" aria-hidden="true"></i></a><div class="round">';
-			if ( has_post_thumbnail() ) {
-				the_post_thumbnail( 'team' );
-			}
-		echo '</div><a class="next button"';
-		$next_post = get_next_post();
-			if (!empty( $next_post )){ echo ' data-postid="'. $next_post->ID .'"'; }
-		echo '><i class="fa fa-chevron-right" aria-hidden="true"></i></a></div>';
+		echo '</div>';
+		echo '<div class="teammiddle"><a class="previous button"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>';
+		if ( has_post_thumbnail() ) {
+			echo '<div class="round"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>';
+			the_post_thumbnail( 'team' );
+			echo '</div>';
+		}
+		echo '<a class="next button"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></div>';
 
 		if ( ! empty( $right ) ) {
 			echo '<div class="teamright">'.$right.'</div>';
-		} else {
-			echo '<div class="teamright">';
-			the_excerpt();
-			echo '</div>';
 		}
 		echo '</div>';
 	endwhile;
@@ -597,35 +581,8 @@ function team_shortcode() {
 		get_template_part( 'template-parts/content', 'none' );
 
 	endif;
+	echo '</div>';
 }
 add_shortcode('team', 'team_shortcode');
 
 add_image_size( 'team', 250, 250, array( 'center', 'center' ) );
-
-
-
-
-/* fucking around with ajax */
-
-function team_ajax_request() {
- 
-    // The $_REQUEST contains all the data sent via ajax
-    if ( isset($_REQUEST) ) {
-     
-        $ID = $_REQUEST['teampostid'];
-         
-        // Let's take the data that was sent and do something with it
-        if ( isset($ID) ) {
-            echo get_the_title( $ID );
-            echo get_the_post_thumbnail( $ID );
-            echo get_post_meta( $ID, 'left_box', true );
-            echo get_post_meta( $ID, 'right_box', true );
-			echo apply_filters('the_content', get_post($ID)->post_content);
-        }
-    }
-     
-    // Always die in functions echoing ajax content
-   die();
-}
-add_action( 'wp_ajax_team_ajax_request', 'team_ajax_request' );
-add_action( 'wp_ajax_nopriv_team_ajax_request', 'team_ajax_request' );

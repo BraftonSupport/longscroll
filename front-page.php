@@ -12,9 +12,9 @@
  */
 
 $video = get_post_meta( get_queried_object_id(), 'bgvideo', true );
-$featured = has_post_thumbnail();
 $color = get_post_meta( get_queried_object_id(), 'textcolor', true );
 if ( !$video ) {
+	$featured = has_post_thumbnail();
 	$bg = get_post_meta( get_queried_object_id(), 'bgcolor', true );
 	$shadow = get_post_meta( get_queried_object_id(), 'shadow', true );
 }
@@ -24,7 +24,7 @@ get_header(); ?>
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
 
-		<div style="<?php
+		<section><div style="<?php
 			if ( $bg ) { echo 'background-color: ' . $bg . ';'; }
 			if ( $color ) { echo 'color: ' . $color . ';'; }
 			if ( $featured ) {
@@ -56,7 +56,7 @@ get_header(); ?>
 			while ( have_posts() ) : the_post();
 				get_template_part( 'template-parts/content', 'page' );
 			endwhile;
-		?></div></div><?php if ( $shadow ) { echo '<hr class="shadow"/>'; } ?>
+		?></div></div><?php if ( $shadow ) { echo '<hr class="shadow"/>'; } ?></section>
 
 		<?php
 		// Set up the objects needed
@@ -75,7 +75,7 @@ get_header(); ?>
 			$color = get_post_meta( $id, 'textcolor', true );
 			$shadow = get_post_meta( $id, 'shadow', true );
 			?>
-			<div id="<?php echo $slug; ?>" class="background"
+			<section><div id="<?php echo $slug; ?>" class="background"
 			<?php if ( $url || $bg ) {
 				echo 'style="';
 					if ( $url ) { echo 'background-image: url('. $url .');'; }
@@ -84,7 +84,7 @@ get_header(); ?>
 				echo '"';
 			} ?>><div class="site-inner">
 				<?php echo apply_filters('the_content', $home_child->post_content); ?>
-			</div><?php if ( $shadow ) { echo '<div class="shadow"></div>'; } ?></div>
+			</div><?php if ( $shadow ) { echo '<div class="shadow"></div>'; } ?></div></section>
 		<?php } ?>
 
 	</main><!-- .site-main -->

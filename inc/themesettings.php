@@ -224,7 +224,7 @@ function yttheme_initialize_options() {
 	);
 	
 	add_settings_field(
-		'Sitcky Nav',
+		'Sticky Nav',
 		__( 'Sticky Nav', 'yttheme' ),
 		'yttheme_stickynav_callback',
 		'yttheme_options',

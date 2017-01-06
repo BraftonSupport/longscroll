@@ -70,9 +70,9 @@ $options = get_option( 'yttheme_options' );
 						while ($my_query->have_posts()) : $my_query->the_post();
 						$url = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
 						echo '<a href="' . get_the_permalink() . '" title="'.get_the_title().'">';
-							if ( $url ) {
-								echo '<div class="thumb" style="background-image: url('.$url[0].')"></div>';
-							}
+							echo '<div class="thumb"';
+								if ( $url ) { echo 'style="background-image: url('.$url[0].')"'; }
+							echo '></div>';
 							echo '<h5>'.get_the_title().'<br/><span class="tiny">'.get_the_date('M j, Y').'</span></h5>';
 						echo '</a>';
 						endwhile;
