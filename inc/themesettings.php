@@ -197,7 +197,7 @@ add_action( 'admin_menu', 'yttheme_admin' );
 
 function yttheme_admin() {
     /* Base Menu */
-    add_theme_page("Yvonnes Theme", "Yvonnes Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
+    add_theme_page("Yvonne's Theme", "Yvonne's Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
 }
 
 /* OPTION PAGE SETTINGS 
@@ -273,7 +273,7 @@ add_action('admin_init', 'yttheme_initialize_options_export_import');
 function yttheme_initialize_options_export_import() {
 	add_settings_section(
 		'options_section_export_import',
-		__( 'Options Export/Import', 'yttheme' ),
+		__( '', 'yttheme' ),
 		'yttheme_callback_export_import',
 		'yttheme_options_export_import'
 	);
@@ -347,11 +347,10 @@ function yttheme_default_options() {
 		$options = get_option( 'yttheme_options' );
 		
 		$html = '<select id="blog_layout" name="yttheme_options[blog_layout]">';
-			$html .= '<option value=" "' . selected( $options['blog_layout'], ' ', false) . '>' . __( 'Default', 'yttheme' ) . '</option>';
+			$html .= '<option value="hero"' . selected( $options['blog_layout'], 'hero', false) . '>' . __( 'Hero First', 'yttheme' ) . '</option>';
 			$html .= '<option value="rich"' . selected( $options['blog_layout'], 'rich', false) . '>' . __( 'Image Rich', 'yttheme' ) . '</option>';
 			$html .= '<option value="full"' . selected( $options['blog_layout'], 'full', false) . '>' . __( 'Full Card', 'yttheme' ) . '</option>';
 			$html .= '<option value="simple"' . selected( $options['blog_layout'], 'simple', false) . '>' . __( 'Simple Card', 'yttheme' ) . '</option>';
-			$html .= '<option value="hero"' . selected( $options['blog_layout'], 'hero', false) . '>' . __( 'Hero First', 'yttheme' ) . '</option>';
 			$html .= '</select>';
 			$html .= '<div class="floatimg" style="margin-top:-125px;"><img src="'. get_stylesheet_directory_uri() .'/inc/img/bloglayout.jpg"></div>';
 		echo $html;
@@ -434,95 +433,56 @@ function yttheme_default_options() {
 
 	}
 
-	function yttheme_callback_export_import() {
-
-		echo '<table><tr><td style="width: 50%;vertical-align: text-top;"><p>Export Settings (as a .json file.)</p>
-			<form method="post">
-				<p><input type="hidden" name="yttheme_action" value="export_settings" /></p>
-				<p>';
-					wp_nonce_field( 'yttheme_export_nonce', 'yttheme_export_nonce' );
-					submit_button( __( 'Export' ), 'secondary', 'submit', false );
-		echo '</p>
-			</form></td>
-			<td><p>Import Settings</p>
-			<form method="post" enctype="multipart/form-data">
-				<p>
-					<input type="file" name="import_file"/>
-				</p>
-				<p>
-					<input type="hidden" name="yttheme_action" value="import_settings" />';
-					wp_nonce_field( 'yttheme_import_nonce', 'yttheme_import_nonce' );
-					submit_button( __( 'Import' ), 'secondary', 'submit', false );
-		echo '	</p>
-			</form></td></tr></table>';
+	function yttheme_callback_export_import() {?>
+		<h2>(update_option() not working?)</h2>
+		<h4>Backup/Export</h4>
+		<p>Here are the stored settings for the current theme:</p>
+		<p><textarea class="code" rows="5" cols="100" onclick="this.select()"><?php echo serialize(get_option( 'yttheme_options' )); ?></textarea></p>
+		<p><a href="?page=yttheme_options&tab=import_settings&action=download" class="button-secondary">Download as file</a></p>
+		<h4>Restore/Import</h4>
+		<p><label class="description" for="upload">Restore a previous backup</label></p>
+		<p><input type="file" name="file" /> <input type="submit" name="upload" id="upload" class="button-primary" value="Upload file" /></p>
+		<?php if (function_exists('wp_nonce_field')) wp_nonce_field('yttheme_restoreOptions', 'yttheme_restoreOptions'); ?>
+	<?php
 	}
 
 
 
 /* Import/Export Settings thingum
 -----------------------------------------------------------------*/
-/* -- Starting it, json file generation -- */
 
-// function yttheme_settings_export() {
+function yttheme_settings_export() {
+	if (isset($_GET['action']) && ($_GET['action'] == 'download')) {
+		header("Cache-Control: public, must-revalidate");
+		header("Pragma: hack");
+		header("Content-Type: text/plain");
+		header('Content-Disposition: attachment; filename="theme-options-'.date("dMy").'.dat"');
+		echo serialize(get_option( 'yttheme_options' ));
+		die();
+	}
+	if (isset($_POST['upload']) && check_admin_referer('yttheme_restoreOptions', 'yttheme_restoreOptions')) {
+		if ($_FILES["file"]["error"] > 0) {
+			// error
+		} else {
+			$options = unserialize(file_get_contents($_FILES["file"]["tmp_name"]));
+			if ($options) {
+				echo $options;
+				foreach ($options as $option) {
+					update_option($option->option_name, unserialize($option->option_value));
+				}
+			}
+		}
+		wp_redirect(admin_url('themes.php?page=yttheme_options&tab=import_settings'));
+		exit;
+	}
+}
+add_action( 'admin_init', 'yttheme_settings_export' );
 
-// 	if( empty( $_POST['yttheme_action'] ) || 'export_settings' != $_POST['yttheme_action'] )
-// 		return;
-
-// 	if( ! wp_verify_nonce( $_POST['yttheme_export_nonce'], 'yttheme_export_nonce' ) )
-// 		return;
-
-// 	if( ! current_user_can( 'manage_options' ) )
-// 		return;
-
-// 	$settings = get_option( 'yttheme_options' );
-
-// 	ignore_user_abort( true );
-
-// 	nocache_headers();
-// 	header( 'Content-Type: application/json; charset=utf-8' );
-// 	header( 'Content-Disposition: attachment; filename=yttheme-settings-export-' . date( 'm-d-Y' ) . '.json' );
-// 	header( "Expires: 0" );
-
-// 	echo json_encode( $settings );
-// 	exit;
-// }
-// add_action( 'admin_init', 'yttheme_settings_export' );
 
 
 
-/* -- importing -- */
 
-// function yttheme_process_settings_import() {
 
-// 	if( empty( $_POST['yttheme_action'] ) || 'import_settings' != $_POST['yttheme_action'] )
-// 		return;
-
-// 	if( ! wp_verify_nonce( $_POST['yttheme_import_nonce'], 'yttheme_import_nonce' ) )
-// 		return;
-
-// 	if( ! current_user_can( 'manage_options' ) )
-// 		return;
-
-// 	$extension = end( explode( '.', $_FILES['import_file']['name'] ) );
-
-// 	if( $extension != 'json' ) {
-// 		wp_die( __( 'Please upload a valid .json file' ) );
-// 	}
-
-// 	$import_file = $_FILES['import_file']['tmp_name'];
-
-// 	if( empty( $import_file ) ) {
-// 		wp_die( __( 'Please upload a file to import' ) );
-// 	}
-
-// 	// Retrieve the settings from the file and convert the json object to an array.
-// 	$settings = (array) json_decode( file_get_contents( $import_file ) );
-
-// 	update_option( 'yttheme_settings', $settings );
-
-// 	wp_safe_redirect( admin_url( 'themes.php?page=yttheme_options&tab=display_options' ) ); exit;
-
-// }
 
 
 
@@ -543,6 +503,8 @@ function yttheme_index() {
 		
 		<?php if( isset( $_GET[ 'tab' ] ) ) {
 			$active_tab = $_GET[ 'tab' ];
+		} else if( $active_tab == 'import_settings' ) {
+			$active_tab = 'import_settings';
 		} else if( $active_tab == 'shortcode' ) {
 			$active_tab = 'shortcode';
 		} else {
@@ -551,20 +513,21 @@ function yttheme_index() {
 
 		<h2 class="nav-tab-wrapper">
 			<a href="?page=yttheme_options&tab=display_options" class="nav-tab <?php echo $active_tab == 'display_options' ? 'nav-tab-active' : ''; ?>">Theme Options</a>
-<!-- 			<a href="?page=yttheme_options&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode Guide</a>
- -->		</h2>
-		
-		<form method="post" action="options.php">
+			<a href="?page=yttheme_options&tab=import_settings" class="nav-tab <?php echo $active_tab == 'import_settings' ? 'nav-tab-active' : ''; ?>">Options Export/Import</a>
+ 			<a href="?page=yttheme_options&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode Guide</a>
+		</h2>
 
+		<form method="post" action="options.php">
 		<?php
 			if( $active_tab == 'display_options' ) {
 				settings_fields( 'yttheme_options' );
 				do_settings_sections( 'yttheme_options' );
 				submit_button();
-				// settings_fields( 'yttheme_options_export_import' );
-				// do_settings_sections( 'yttheme_options_export_import' );
-			// } else { ?>
-<!-- 				<h2> DELETE "FULL" MENTIONS Shortcodes</h2>
+			} else if( $active_tab == 'import_settings' ) {
+				settings_fields( 'yttheme_options_export_import' );
+				do_settings_sections( 'yttheme_options_export_import' );
+			} else { ?>
+				<h2>DELETE "FULL" MENTIONS Shortcodes/ fix images to what they're like in this theme</h2>
 				<p>Row - <pre>[row]Your Content[/row]</pre>
 				<p>Full Width - <pre>[full]Your Content[/full]</pre></p>
 				<p>Half - <pre>[half]Your Content[/half]</pre></p>
@@ -573,29 +536,26 @@ function yttheme_index() {
 				<p>You'll need to use the Full Width template with the [row] shortcode in order to get . You can put other shortcodes within the row shortcode.</p>
 				<p><strong>Attributes:</strong> color, bg-color, bg-image, and padding. Hexcodes, color names, and percentages are ok!</p><br/>
 				<h2>Example:</h2><pre>[row]Your Content[/row]</pre>
-					<img src="<?php //echo get_stylesheet_directory_uri(); ?>/inc/img/short1.png" class="short"></p>
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short1.png" class="short"></p>
 				<p>[row][full][/full][/row] would mean that there is space between the row and the content.</p>
 
 				<h2>Example:</h2>
 				<pre>[row bg-color="cornflowerblue"][full]Are creatures of the cosmos!... little good evidence?[/full][/row]</pre>
-					<img src="<?php //echo get_stylesheet_directory_uri(); ?>/inc/img/short4.png" class="short"></p>
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short4.png" class="short"></p>
 				<pre>[row bg-color="steelblue"]Are creatures of the cosmos!... little good evidence?[/row]</pre>
-					<img src="<?php //echo get_stylesheet_directory_uri(); ?>/inc/img/short5.png" class="short"></p>
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short5.png" class="short"></p>
 
 				<h2>Example:</h2>
 					<pre>[row bg-color="darkslateblue" padding=0][full padding=0][half padding=110px bg-image="wombat_image_url"]&#60;h1&#62;Your&#60;/h1&#62;[/half][fourth color="pink"]Content[/fourth][fourth color="#000" ]Astonishment.[/fourth][/full][/row]</pre>
-					<img src="<?php //echo get_stylesheet_directory_uri(); ?>/inc/img/short2.png" class="short">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short2.png" class="short">
 					<br/><br/>
 
 				<p>[row][/row]</p>
 				<h2>Example:</h2>
 					<pre>[row bg-color="#666" color="#fff" padding="0"][half bg-image="wombat_image_url"]Light years![/half][half]Emerged into consciousness a billion trillion realm of the galaxies, Sea of Tranquility globular star cluster brain is the seed of intelligence permanence of the stars Rig Veda, paroxysm of global death Drake Equation tingling of the spine science cosmic fugue.[/half][/row]</pre>
-					<img src="<?php //echo get_stylesheet_directory_uri(); ?>/inc/img/short3.png" class="short"> -->
-			<?php } // end if/else
-		?>
-
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short3.png" class="short">
+			<?php } ?>
 		</form>
-		
 	</div>
 <?php
 } ?>

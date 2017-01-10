@@ -80,7 +80,10 @@ if ( $options['ga'] ) : ?>
 					<?php if ( is_active_sidebar( 'header' ) ) {
 						dynamic_sidebar( 'header' );
 					}
-					echo social_sharing_buttons($content); ?>
+					if ( $options['ssbutton'] ) {
+						echo social_sharing_buttons($content);
+					}
+					?>
 
 					<button id="menu-toggle" class="menu-toggle"><?php _e( 'Menu', 'yttheme' ); ?></button>
 

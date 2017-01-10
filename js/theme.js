@@ -7,6 +7,15 @@ jQuery(document).ready(function($){
   	$(this).attr('href', string);
   })
 
+  // back to top button
+  $(window).scroll(function() {
+    if( $(this).scrollTop() > 250 ) {
+      $('#scrollTopbutton').show();
+    } else {
+      $('#scrollTopbutton').hide();
+    }
+  });
+
   // smooth scroll
   $('a[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -28,30 +37,18 @@ jQuery(document).ready(function($){
   }
   $( ".teammiddle img" ).css("border-color", bg);
 
+  $(".fa-spinner").fadeTo( 0, 1 ).delay(150).fadeTo( "fast", 0 );
   $( ".team .container:first-of-type").removeClass('hide');
-  $(".fa-spinner").fadeTo( "fast", 1 ).delay(100).fadeTo( "fast", 0 );
 
   $( ".team .container:not(:first-of-type) .previous.button" ).click( function() {
-    $(".fa-spinner").fadeTo( "fast", 1 ).delay(100).fadeTo( "fast", 0 );
+    $(".fa-spinner").fadeTo( 0, 1 ).delay(150).fadeTo( "fast", 0 );
     $(this).parents(".container").addClass('hide');
     $(this).parents(".container").prev().removeClass('hide');
-    // $(".fa-spinner")
-    //   .delay(800).fadeTo(0); 
-      // .queue(function (next) { 
-      //   $(this)
-      //   next(); 
-      // });
   });
 
   $( ".team .container:not(:last-of-type) .next.button" ).click( function() {
-    $(".fa-spinner").fadeTo( "fast", 1 ).delay(100).fadeTo( "fast", 0 );
+    $(".fa-spinner").fadeTo( 0, 1 ).delay(150).fadeTo( "fast", 0 );
     $(this).parents(".container").addClass('hide');
     $(this).parents(".container").next().removeClass('hide');
-    // $(".fa-spinner")
-      
-      // .queue(function (next) { 
-      //   $(this)
-      //   next(); 
-      // });
   });
 });

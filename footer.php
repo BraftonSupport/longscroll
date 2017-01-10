@@ -55,7 +55,10 @@
 		</div><p class="copyright"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?></a></p>
 		</div><!-- .site-info -->
 	</footer><!-- .site-footer -->
-	
+	<div id="scrollTopbutton">
+		<a href="#masthead"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+		<a href="#colophon"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+	</div>
 </div><!-- .site -->
 
 <?php wp_footer(); ?>
