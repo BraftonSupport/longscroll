@@ -1,5 +1,5 @@
 /**
- * Yvonne's Theme keyboard support for image navigation.
+ * Diving Bell keyboard support for image navigation.
  */
 
 ( function( $ ) {

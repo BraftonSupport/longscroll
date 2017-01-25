@@ -6,7 +6,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 $options = get_option( 'yttheme_options' );
 

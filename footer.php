@@ -6,7 +6,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 ?>
 
@@ -48,7 +48,7 @@
 				/**
 				 * Fires before the yttheme footer text for footer customization.
 				 *
-				 * @since Yvonne's Theme 1.0
+				 * @since Diving Bell 1.0
 				 */
 				do_action( 'yttheme_credits' );
 			?>

@@ -1,12 +1,12 @@
 <?php
 /**
- * Custom Yvonne's Theme template tags
+ * Custom Diving Bell template tags
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 
 if ( ! function_exists( 'yttheme_entry_meta' ) ) :
@@ -15,7 +15,7 @@ if ( ! function_exists( 'yttheme_entry_meta' ) ) :
  *
  * Create your own yttheme_entry_meta() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 function yttheme_entry_meta() {
 	// if ( 'post' === get_post_type() ) {
@@ -59,7 +59,7 @@ if ( ! function_exists( 'yttheme_entry_date' ) ) :
  *
  * Create your own yttheme_entry_date() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 function yttheme_entry_date() {
 	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
@@ -89,7 +89,7 @@ if ( ! function_exists( 'yttheme_entry_taxonomies' ) ) :
  *
  * Create your own yttheme_entry_taxonomies() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 function yttheme_categorized_blog() {
 	if ( false === ( $all_the_cool_cats = get_transient( 'yttheme_categories' ) ) ) {
@@ -143,7 +143,7 @@ if ( ! function_exists( 'yttheme_post_thumbnail' ) ) :
  *
  * Create your own yttheme_post_thumbnail() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 function yttheme_post_thumbnail() {
 	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
@@ -175,7 +175,7 @@ if ( ! function_exists( 'yttheme_excerpt' ) ) :
 	 *
 	 * Create your own yttheme_excerpt() function to override in a child theme.
 	 *
-	 * @since Yvonne's Theme 1.0
+	 * @since Diving Bell 1.0
 	 *
 	 * @param string $class Optional. Class string of the div element. Defaults to 'entry-summary'.
 	 */
@@ -197,7 +197,7 @@ if ( ! function_exists( 'yttheme_excerpt_more' ) && ! is_admin() ) :
  *
  * Create your own yttheme_excerpt_more() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @return string 'Continue reading' link prepended with an ellipsis.
  */

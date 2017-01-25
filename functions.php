@@ -2,15 +2,15 @@
 /*
 Author: Yvonne Tse
 URL: http://yvonnetse.com/
-Version: Yvonne's Theme 1.0
+Version: Diving Bell 1.0
 */
-define("yvonne", dirname(__FILE__));
-include yvonne.'/inc/themesettings.php';
-include yvonne.'/inc/themewidgets.php';
-include yvonne.'/inc/template-tags.php';
+define("divingbell", dirname(__FILE__));
+include divingbell.'/inc/themesettings.php';
+include divingbell.'/inc/themewidgets.php';
+include divingbell.'/inc/template-tags.php';
 
 /**
- * Yvonne's Theme only works in WordPress 4.4 or later.
+ * Diving Bell only works in WordPress 4.4 or later.
  */
 if ( version_compare( $GLOBALS['wp_version'], '4.4-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
@@ -123,11 +123,11 @@ function excerpt($limit) {
 
 if ( ! function_exists( 'yttheme_fonts_url' ) ) :
 /**
- * Register Google fonts for Yvonne's Theme.
+ * Register Google fonts for Diving Bell.
  *
  * Create your own yttheme_fonts_url() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @return string Google fonts URL for the theme.
  */

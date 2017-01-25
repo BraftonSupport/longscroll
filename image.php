@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 
 get_header(); ?>
@@ -37,7 +37,7 @@ get_header(); ?>
 								/**
 								 * Filter the default yttheme image attachment size.
 								 *
-								 * @since Yvonne's Theme 1.0
+								 * @since Diving Bell 1.0
 								 *
 								 * @param string $image_size Image size. Default 'large'.
 								 */

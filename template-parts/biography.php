@@ -4,7 +4,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 ?>
 
@@ -12,9 +12,9 @@
 	<div class="author-avatar">
 		<?php
 		/**
-		 * Filter the Yvonne's Theme author bio avatar size.
+		 * Filter the Diving Bell author bio avatar size.
 		 *
-		 * @since Yvonne's Theme 1.0
+		 * @since Diving Bell 1.0
 		 *
 		 * @param int $size The avatar height and width size in pixels.
 		 */

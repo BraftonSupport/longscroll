@@ -11,7 +11,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 
 get_header(); ?>
@@ -21,7 +21,7 @@ get_header(); ?>
 
 		<?php if ( have_posts() ) : ?>
 			<?php if ( is_home() && ! is_front_page() ) : ?><header class="entry-header">
-				<h1 class="entry-title">Latest Posts</h1>
+				<h1 class="entry-title"><?php single_post_title(); ?></h1>
 			</header><!-- .page-header -->
 			<?php endif; ?>
 

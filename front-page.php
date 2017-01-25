@@ -8,7 +8,7 @@
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 
 $video = get_post_meta( get_queried_object_id(), 'bgvideo', true );

@@ -197,7 +197,7 @@ add_action( 'admin_menu', 'yttheme_admin' );
 
 function yttheme_admin() {
     /* Base Menu */
-    add_theme_page("Yvonne's Theme", "Yvonne's Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
+    add_theme_page("Diving Bell", "Diving Bell Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
 }
 
 /* OPTION PAGE SETTINGS 
@@ -327,7 +327,7 @@ function yttheme_default_options() {
 			$html .= '<option value="next"' . selected( $options['nav'], 'next', false) . '>' . __( 'Next to the Logo (75%)', 'yttheme' ) . '</option>';
 			$html .= '<option value="below"' . selected( $options['nav'], 'below', false) . '>' . __( 'Below (100%)', 'yttheme' ) . '</option>';
 			$html .= '</select>';
-			$html .= '<div class="floatimg"><img src="'. get_stylesheet_directory_uri() .'/inc/img/next.png"></div>';
+			$html .= '<div class="floatimg"><img src="'. get_template_directory_uri() .'/inc/img/next.png"></div>';
 		echo $html;
 	}
 	
@@ -352,7 +352,7 @@ function yttheme_default_options() {
 			$html .= '<option value="full"' . selected( $options['blog_layout'], 'full', false) . '>' . __( 'Full Card', 'yttheme' ) . '</option>';
 			$html .= '<option value="simple"' . selected( $options['blog_layout'], 'simple', false) . '>' . __( 'Simple Card', 'yttheme' ) . '</option>';
 			$html .= '</select>';
-			$html .= '<div class="floatimg" style="margin-top:-125px;"><img src="'. get_stylesheet_directory_uri() .'/inc/img/bloglayout.jpg"></div>';
+			$html .= '<div class="floatimg" style="margin-top:-125px;"><img src="'. get_template_directory_uri() .'/inc/img/bloglayout.jpg"></div>';
 		echo $html;
 	}
 
@@ -434,7 +434,6 @@ function yttheme_default_options() {
 	}
 
 	function yttheme_callback_export_import() {?>
-		<h2>(update_option() not working?)</h2>
 		<h4>Backup/Export</h4>
 		<p>Here are the stored settings for the current theme:</p>
 		<p><textarea class="code" rows="5" cols="100" onclick="this.select()"><?php echo serialize(get_option( 'yttheme_options' )); ?></textarea></p>
@@ -462,13 +461,12 @@ function yttheme_settings_export() {
 	}
 	if (isset($_POST['upload']) && check_admin_referer('yttheme_restoreOptions', 'yttheme_restoreOptions')) {
 		if ($_FILES["file"]["error"] > 0) {
-			// error
 		} else {
 			$options = unserialize(file_get_contents($_FILES["file"]["tmp_name"]));
 			if ($options) {
 				echo $options;
-				foreach ($options as $option) {
-					update_option($option->option_name, unserialize($option->option_value));
+				foreach ($options as $key => $value) {
+					update_option($key, $value);
 				}
 			}
 		}
@@ -477,11 +475,6 @@ function yttheme_settings_export() {
 	}
 }
 add_action( 'admin_init', 'yttheme_settings_export' );
-
-
-
-
-
 
 
 
@@ -498,7 +491,7 @@ function yttheme_index() {
 	<!-- Create a header in the default WordPress 'wrap' container -->
 	<div class="wrap">
 
-		<h2><?php _e( 'Yvonne\'s Theme Options', 'yttheme' ); ?></h2>
+		<h2><?php _e( 'Diving Bell Theme Options', 'yttheme' ); ?></h2>
 		<?php settings_errors(); ?>
 		
 		<?php if( isset( $_GET[ 'tab' ] ) ) {
@@ -517,7 +510,7 @@ function yttheme_index() {
  			<a href="?page=yttheme_options&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode Guide</a>
 		</h2>
 
-		<form method="post" action="options.php">
+		<form method="post" action="options.php"<?php if( $active_tab == 'import_settings' ) { echo ' enctype="multipart/form-data"'; } ?> >
 		<?php
 			if( $active_tab == 'display_options' ) {
 				settings_fields( 'yttheme_options' );
@@ -527,33 +520,32 @@ function yttheme_index() {
 				settings_fields( 'yttheme_options_export_import' );
 				do_settings_sections( 'yttheme_options_export_import' );
 			} else { ?>
-				<h2>DELETE "FULL" MENTIONS Shortcodes/ fix images to what they're like in this theme</h2>
+				<h2>Team Shortcode</h2>
+					<pre>[team]</pre>
+				<h2>Shortcode Examples</h2>
 				<p>Row - <pre>[row]Your Content[/row]</pre>
-				<p>Full Width - <pre>[full]Your Content[/full]</pre></p>
 				<p>Half - <pre>[half]Your Content[/half]</pre></p>
 				<p>Third - <pre>[third]Your Content[/third]</pre></p>
 				<p>Fourth - <pre>[fourth]Your Content[/fourth]</pre></p>
-				<p>You'll need to use the Full Width template with the [row] shortcode in order to get . You can put other shortcodes within the row shortcode.</p>
-				<p><strong>Attributes:</strong> color, bg-color, bg-image, and padding. Hexcodes, color names, and percentages are ok!</p><br/>
-				<h2>Example:</h2><pre>[row]Your Content[/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short1.png" class="short"></p>
-				<p>[row][full][/full][/row] would mean that there is space between the row and the content.</p>
+				<p><strong>Attributes:</strong> class, color, bg-color, bg-image, and padding. Hexcodes, color names, and percentages are ok!</p><br/>
+				<h2>Examples:</h2>
+				<pre>[row]text[/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short1.png" class="short">
+				<pre>[row bg-color="steelblue"]Galaxies quis... bits of moving fluff?[/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short2.png" class="short">
+				<pre>[row bg-color="steelblue" padding="50px"]Galaxies quis... bits of moving fluff?[/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short2a.png" class="short">
+				<pre>[row][half]Duis aute irure dolor... fugiat nulla pariatur.[/half][third]Galaxies quis... commodo consequat.[/third][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short3.png" class="short">
+				<pre>[row bg-color="cornflowerblue"][half]Galaxies quis... commodo consequat.[/half][fourth bg-color="lightblue" padding="25px"]Excepteur sint... moving fluff?[/fourth][fourth]Duis aute... nulla pariatur.[/fourth][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short4.png" class="short">
+				<pre>[half bg-color="cornflowerblue"]Galaxies quis... commodo consequat.[/half][fourth bg-color="lightblue" padding="25px"]Excepteur sint... moving fluff?[/fourth][fourth bg-color="cornflowerblue"]Duis aute... fugiat nulla pariatur.[/fourth]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short5.png" class="short">
+				<pre>[row bg-color="darkslateblue" padding=0][half color="#fff" padding=110px bg-image="wombat url"]&lt;h1&gt;Your&lt;/h1&gt;[/half][fourth color="pink"]Content[/fourth][fourth color="#000" ]Astonishment.[/fourth][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short6.png" class="short">
+				<pre>[row bg-color="#666" color="#fff" padding="0"][half bg-image="wombat url"]Light years![/half][half]Emerged into... cosmic fugue.[/half][/row]</pre>
+					<img src="<?php echo get_template_directory_uri(); ?>/inc/img/short7.png" class="short">
 
-				<h2>Example:</h2>
-				<pre>[row bg-color="cornflowerblue"][full]Are creatures of the cosmos!... little good evidence?[/full][/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short4.png" class="short"></p>
-				<pre>[row bg-color="steelblue"]Are creatures of the cosmos!... little good evidence?[/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short5.png" class="short"></p>
-
-				<h2>Example:</h2>
-					<pre>[row bg-color="darkslateblue" padding=0][full padding=0][half padding=110px bg-image="wombat_image_url"]&#60;h1&#62;Your&#60;/h1&#62;[/half][fourth color="pink"]Content[/fourth][fourth color="#000" ]Astonishment.[/fourth][/full][/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short2.png" class="short">
-					<br/><br/>
-
-				<p>[row][/row]</p>
-				<h2>Example:</h2>
-					<pre>[row bg-color="#666" color="#fff" padding="0"][half bg-image="wombat_image_url"]Light years![/half][half]Emerged into consciousness a billion trillion realm of the galaxies, Sea of Tranquility globular star cluster brain is the seed of intelligence permanence of the stars Rig Veda, paroxysm of global death Drake Equation tingling of the spine science cosmic fugue.[/half][/row]</pre>
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/inc/img/short3.png" class="short">
 			<?php } ?>
 		</form>
 	</div>

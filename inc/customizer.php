@@ -1,16 +1,16 @@
 <?php
 /**
- * Yvonne's Theme Customizer functionality
+ * Diving Bell Customizer functionality
  *
  * @package WordPress
  * @subpackage Twenty_Sixteen
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 
 /**
  * Sets up the WordPress core custom header and custom background features.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @see yttheme_header_style()
  */
@@ -20,9 +20,9 @@ function yttheme_custom_header_and_background() {
 	$default_text_color       = trim( $color_scheme[4], '#' );
 
 	/**
-	 * Filter the arguments used when adding 'custom-background' support in Yvonne's Theme.
+	 * Filter the arguments used when adding 'custom-background' support in Diving Bell.
 	 *
-	 * @since Yvonne's Theme 1.0
+	 * @since Diving Bell 1.0
 	 *
 	 * @param array $args {
 	 *     An array of custom-background support arguments.
@@ -35,9 +35,9 @@ function yttheme_custom_header_and_background() {
 	) ) );
 
 	/**
-	 * Filter the arguments used when adding 'custom-header' support in Yvonne's Theme.
+	 * Filter the arguments used when adding 'custom-header' support in Diving Bell.
 	 *
-	 * @since Yvonne's Theme 1.0
+	 * @since Diving Bell 1.0
 	 *
 	 * @param array $args {
 	 *     An array of custom-header support arguments.
@@ -66,7 +66,7 @@ if ( ! function_exists( 'yttheme_header_style' ) ) :
  *
  * Create your own yttheme_header_style() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @see yttheme_custom_header_and_background().
  */
@@ -96,7 +96,7 @@ endif; // yttheme_header_style
 /**
  * Adds postMessage support for site title and description for the Customizer.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @param WP_Customize_Manager $wp_customize The Customizer object.
  */
@@ -187,7 +187,7 @@ function yttheme_customize_register( $wp_customize ) {
 add_action( 'customize_register', 'yttheme_customize_register', 11 );
 
 /**
- * Registers color schemes for Yvonne's Theme.
+ * Registers color schemes for Diving Bell.
  *
  * Can be filtered with {@see 'yttheme_color_schemes'}.
  *
@@ -199,17 +199,17 @@ add_action( 'customize_register', 'yttheme_customize_register', 11 );
  * 5. Main Text Color.
  * 6. Secondary Text Color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @return array An associative array of color scheme options.
  */
 function yttheme_get_color_schemes() {
 	/**
-	 * Filter the color schemes registered for use with Yvonne's Theme.
+	 * Filter the color schemes registered for use with Diving Bell.
 	 *
 	 * The default schemes include 'default', 'dark', 'gray', 'red', and 'blue'.
 	 *
-	 * @since Yvonne's Theme 1.0
+	 * @since Diving Bell 1.0
 	 *
 	 * @param array $schemes {
 	 *     Associative array of color schemes data.
@@ -241,8 +241,8 @@ function yttheme_get_color_schemes() {
 			'colors' => array(
 				'#222222',
 				'#111111',
-				'#bc825c',
-				'#eabb8c',
+				'#845740',
+				'#ce8133',
 				'#bababa',
 				'#999999',
 			),
@@ -252,10 +252,10 @@ function yttheme_get_color_schemes() {
 			'colors' => array(
 				'#616a73',
 				'#4d545c',
-				'#bdd6ad',
+				'#9ab28d',
 				'#66ddff',
 				'#f5f5f5',
-				'#f0f0f0',
+				'#cecece',
 			),
 		),
 		'red' => array(
@@ -272,9 +272,9 @@ function yttheme_get_color_schemes() {
 		'blue' => array(
 			'label'  => __( 'Blue', 'yttheme' ),
 			'colors' => array(
-				'#bbddee',
+				'#cceeff',
 				'#005791',
-				'#42c0ff',
+				'#00a9ff',
 				'#87a6c1',
 				'#333333',
 				'#ffffff',
@@ -285,11 +285,11 @@ function yttheme_get_color_schemes() {
 
 if ( ! function_exists( 'yttheme_get_color_scheme' ) ) :
 /**
- * Retrieves the current Yvonne's Theme color scheme.
+ * Retrieves the current Diving Bell color scheme.
  *
  * Create your own yttheme_get_color_scheme() function to override in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @return array An associative array of either the current or default color scheme HEX values.
  */
@@ -307,12 +307,12 @@ endif; // yttheme_get_color_scheme
 
 if ( ! function_exists( 'yttheme_get_color_scheme_choices' ) ) :
 /**
- * Retrieves an array of color scheme choices registered for Yvonne's Theme.
+ * Retrieves an array of color scheme choices registered for Diving Bell.
  *
  * Create your own yttheme_get_color_scheme_choices() function to override
  * in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @return array Array of color schemes.
  */
@@ -331,12 +331,12 @@ endif; // yttheme_get_color_scheme_choices
 
 if ( ! function_exists( 'yttheme_sanitize_color_scheme' ) ) :
 /**
- * Handles sanitization for Yvonne's Theme color schemes.
+ * Handles sanitization for Diving Bell color schemes.
  *
  * Create your own yttheme_sanitize_color_scheme() function to override
  * in a child theme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @param string $value Color scheme name value.
  * @return string Color scheme name.
@@ -355,7 +355,7 @@ endif; // yttheme_sanitize_color_scheme
 /**
  * Enqueues front-end CSS for color scheme.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @see wp_add_inline_style()
  */
@@ -403,7 +403,7 @@ add_action( 'wp_enqueue_scripts', 'yttheme_color_scheme_css' );
  *
  * Passes color scheme data as colorScheme global.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 function yttheme_customize_control_js() {
 	wp_enqueue_script( 'color-scheme-control', get_template_directory_uri() . '/js/color-scheme-control.js', array( 'customize-controls', 'iris', 'underscore', 'wp-util' ), '20150825', true );
@@ -414,7 +414,7 @@ add_action( 'customize_controls_enqueue_scripts', 'yttheme_customize_control_js'
 /**
  * Binds JS handlers to make the Customizer preview reload changes asynchronously.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 function yttheme_customize_preview_js() {
 	wp_enqueue_script( 'yttheme-customize-preview', get_template_directory_uri() . '/js/customize-preview.js', array( 'customize-preview' ), '20150825', true );
@@ -424,7 +424,7 @@ add_action( 'customize_preview_init', 'yttheme_customize_preview_js' );
 /**
  * Returns CSS for the color schemes.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @param array $colors Color scheme colors.
  * @return string Color scheme CSS.
@@ -493,7 +493,13 @@ function yttheme_get_color_scheme_css( $colors ) {
 	.widget_calendar tbody a:focus,
 	.page-links a,
 	.page-links a:hover,
-	.page-links a:focus {
+	.page-links a:focus,
+	.team .container:first-of-type .previous.button,
+	.team .container:last-of-type .next.button,
+	.team .container:first-of-type .previous.button:hover,
+	.team .container:last-of-type .next.button:hover,
+	.simple .entry-header,
+	.hero .more-link {
 		color: {$colors['secondary_background_color']};
 	}
 
@@ -557,7 +563,13 @@ function yttheme_get_color_scheme_css( $colors ) {
 	.pagination .next:focus,
 	.widget_calendar tbody a,
 	.page-links a:hover,
-	.page-links a:focus {
+	.page-links a:focus,
+	.team .container:first-of-type .previous.button,
+	.team .container:last-of-type .next.button,
+	.team .container:first-of-type .previous.button:hover,
+	.team .container:last-of-type .next.button:hover,
+	.simple .entry-header,
+	.hero .more-link {
 		background-color: {$colors['link_color']};
 	}
 
@@ -679,11 +691,14 @@ function yttheme_get_color_scheme_css( $colors ) {
 	.pagination:after,
 	.pagination .prev,
 	.pagination .next,
-	.page-links a {
+	.page-links a,
+	.hero .more-link:hover {
 		background-color: {$colors['main_text_color']};
 	}
 
-	.social-navigation a {
+	.button:hover,
+	.social-navigation a,
+	.hero .more-link:hover {
 		color: {$colors['secondary_text_color']};
 	}
 
@@ -774,7 +789,7 @@ CSS;
  * The template generates the css dynamically for instant display in the
  * Customizer preview.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  */
 function yttheme_color_scheme_css_template() {
 	$colors = array(
@@ -798,7 +813,7 @@ add_action( 'customize_controls_print_footer_scripts', 'yttheme_color_scheme_css
 /**
  * Enqueues front-end CSS for the secondary background color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @see wp_add_inline_style()
  */
@@ -830,7 +845,7 @@ add_action( 'wp_enqueue_scripts', 'yttheme_secondary_background_color_css', 11 )
 /**
  * Enqueues front-end CSS for the link color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @see wp_add_inline_style()
  */
@@ -915,7 +930,13 @@ function yttheme_link_color_css() {
 		.pagination .next:focus,
 		.widget_calendar tbody a,
 		.page-links a:hover,
-		.page-links a:focus {
+		.page-links a:focus,
+		.team .container:first-of-type .previous.button,
+		.team .container:last-of-type .next.button,
+		.team .container:first-of-type .previous.button:hover,
+		.team .container:last-of-type .next.button:hover,
+		.simple .entry-header,
+		.hero .more-link {
 			background-color: %1$s;
 		}
 
@@ -1034,7 +1055,8 @@ function yttheme_link_hover_color_css() {
 		.pagination .next:focus,
 		.widget_calendar tbody a,
 		.page-links a:hover,
-		.page-links a:focus {
+		.page-links a:focus,
+		.hero .more-link:hover {
 			background-color: %1$s;
 		}
 
@@ -1053,7 +1075,7 @@ add_action( 'wp_enqueue_scripts', 'yttheme_link_color_css', 11 );
 /**
  * Enqueues front-end CSS for the main text color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @see wp_add_inline_style()
  */
@@ -1123,7 +1145,8 @@ function yttheme_main_text_color_css() {
 		.pagination:after,
 		.pagination .prev,
 		.pagination .next,
-		.page-links a {
+		.page-links a,
+		.hero .more-link:hover {
 			background-color: %1$s;
 		}
 
@@ -1190,7 +1213,7 @@ add_action( 'wp_enqueue_scripts', 'yttheme_main_text_color_css', 11 );
 /**
  * Enqueues front-end CSS for the secondary text color.
  *
- * @since Yvonne's Theme 1.0
+ * @since Diving Bell 1.0
  *
  * @see wp_add_inline_style()
  */

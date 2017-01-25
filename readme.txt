@@ -1,4 +1,4 @@
-=== Yvonne's Theme ===
+=== Diving Bell ===
 Contributors: me!
 Tags: two-columns, left-sidebar, fixed-layout, responsive-layout, accessibility-ready, custom-colors, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
 Requires at least: 4.1

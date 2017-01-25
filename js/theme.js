@@ -2,9 +2,9 @@ jQuery(document).ready(function($){
 
   // making sure the navigation works on the home page as well as on the blog pages
   $( '.home .main-navigation a' ).each(function(){
-  	var string = $(this).attr('href');
-  	string=string.replace(/http.+?(?=#)/g, '');
-  	$(this).attr('href', string);
+    var string = $(this).attr('href');
+    string=string.replace(/http.+?(?=#)/g, '');
+    $(this).attr('href', string);
   })
 
   // back to top button
@@ -23,7 +23,7 @@ jQuery(document).ready(function($){
       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
       if (target.length) {
         $('html, body').animate({
-          scrollTop: (target.offset().top)-200
+          scrollTop: (target.offset().top)-125
         }, 1000);
         return false;
       }
@@ -51,4 +51,9 @@ jQuery(document).ready(function($){
     $(this).parents(".container").addClass('hide');
     $(this).parents(".container").next().removeClass('hide');
   });
+
+  $('.main-navigation a').click(function() {
+    $('#menu-toggle').trigger('click');
+  });
+
 });
