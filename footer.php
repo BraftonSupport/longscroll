@@ -56,7 +56,7 @@
 		</div><!-- .site-info -->
 	</footer><!-- .site-footer -->
 	<div id="scrollTopbutton">
-		<a href="#masthead"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+		<a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
 		<a href="#colophon"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
 	</div>
 </div><!-- .site -->

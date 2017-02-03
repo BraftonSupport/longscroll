@@ -8,19 +8,23 @@
 	var cssTemplate = wp.template( 'yttheme-color-scheme' ),
 		colorSchemeKeys = [
 			'background_color',
-			'secondary_background_color',
+			'main_text_color',
 			'link_color',
 			'link_hover_color',
-			'main_text_color',
+			'secondary_background_color',
 			'secondary_text_color',
+			'secondary_link_color',
+			'secondary_link_hover_color',
 		],
 		colorSettings = [
 			'background_color',
-			'secondary_background_color',
+			'main_text_color',
 			'link_color',
 			'link_hover_color',
-			'main_text_color',
+			'secondary_background_color',
 			'secondary_text_color',
+			'secondary_link_color',
+			'secondary_link_hover_color',
 		];
 
 	api.controlConstructor.select = api.Control.extend( {
@@ -36,10 +40,10 @@
 						.data( 'data-default-color', color )
 						.wpColorPicker( 'defaultColor', color );
 
-					// Update Page Background Color.
+					// Update Main Text Color.
 					color = colors[1];
-					api( 'secondary_background_color' ).set( color );
-					api.control( 'secondary_background_color' ).container.find( '.color-picker-hex' )
+					api( 'main_text_color' ).set( color );
+					api.control( 'main_text_color' ).container.find( '.color-picker-hex' )
 						.data( 'data-default-color', color )
 						.wpColorPicker( 'defaultColor', color );
 
@@ -58,10 +62,10 @@
 						.data( 'data-default-color', color )
 						.wpColorPicker( 'defaultColor', color );
 
-					// Update Main Text Color.
+					// Update Page Background Color.
 					color = colors[4];
-					api( 'main_text_color' ).set( color );
-					api.control( 'main_text_color' ).container.find( '.color-picker-hex' )
+					api( 'secondary_background_color' ).set( color );
+					api.control( 'secondary_background_color' ).container.find( '.color-picker-hex' )
 						.data( 'data-default-color', color )
 						.wpColorPicker( 'defaultColor', color );
 
@@ -69,6 +73,20 @@
 					color = colors[5];
 					api( 'secondary_text_color' ).set( color );
 					api.control( 'secondary_text_color' ).container.find( '.color-picker-hex' )
+						.data( 'data-default-color', color )
+						.wpColorPicker( 'defaultColor', color );
+
+					// Update Secondary Link Color.
+					color = colors[6];
+					api( 'secondary_link_color' ).set( color );
+					api.control( 'secondary_link_color' ).container.find( '.color-picker-hex' )
+						.data( 'data-default-color', color )
+						.wpColorPicker( 'defaultColor', color );
+
+					// Update Secondary Link Hover Color.
+					color = colors[7];
+					api( 'secondary_link_hover_color' ).set( color );
+					api.control( 'secondary_link_hover_color' ).container.find( '.color-picker-hex' )
 						.data( 'data-default-color', color )
 						.wpColorPicker( 'defaultColor', color );
 				} );

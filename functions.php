@@ -177,6 +177,10 @@ add_action( 'wp_head', 'yttheme_javascript_detection', 0 );
  * Enqueue all the things!
  */
 function yttheme_enqueuingallthethings() {
+
+	// Jquerying?
+	wp_enqueue_script('jquery');
+
 	// Add custom fonts, used in the main stylesheet.
 	wp_enqueue_style( 'yttheme-fonts', yttheme_fonts_url(), array(), null );
 
@@ -187,9 +191,9 @@ function yttheme_enqueuingallthethings() {
 	// Theme stylesheet.
 	wp_enqueue_style( 'yttheme-style', get_template_directory_uri() . '/style.css' );
 
-	// Featherlight
-	wp_enqueue_style( 'featherlight', get_template_directory_uri() . '/js/featherlight.css' );
-	wp_enqueue_script( 'featherlight.js', get_template_directory_uri() . '/js/featherlight.js');
+	// Fancybox!
+	wp_enqueue_style( 'fancybox', get_template_directory_uri() . '/js/fancybox.css' );
+	wp_enqueue_script( 'fancybox', get_template_directory_uri() . '/js/fancybox.js');
 
 	// Load the Internet Explorer specific stylesheet.
 	wp_enqueue_style( 'yttheme-ie', get_template_directory_uri() . '/css/ie.css', array( 'yttheme-style' ), '20150930' );
@@ -397,6 +401,18 @@ if ( $options['ssbutton'] ) {
 
 /* Neat background things for home page sections */
 
+add_action( 'admin_enqueue_scripts', 'bg_add_color_picker' );
+function bg_add_color_picker( $hook ) {
+ 
+    if( is_admin() ) { 
+        // Add the color picker css file       
+        wp_enqueue_style( 'wp-color-picker' ); 
+         
+        // Include our custom jQuery file with WordPress Color Picker dependency
+        wp_enqueue_script( 'color-picker', get_template_directory_uri() . '/js/color-picker.js', array( 'wp-color-picker' ), false, true );
+    }
+}
+
 function bg_meta_markup($object) {
 	wp_nonce_field(basename(__FILE__), "meta-box-nonce");
 	?>
@@ -411,10 +427,10 @@ function bg_meta_markup($object) {
 			<?php } ?>
 
 			<p><label for="bgcolor">Background Color</label><br>
-			<input name="bgcolor" type="text" placeholder="Enter hexcode" value="<?php echo get_post_meta($object->ID, "bgcolor", true); ?>" ></p>
+			<input class="color-field" name="bgcolor" value="<?php echo get_post_meta($object->ID, "bgcolor", true); ?>" ></p>
 
 			<p><label for="textcolor">Text Color</label><br>
-			<input name="textcolor" type="text" placeholder="Enter hexcode" value="<?php echo get_post_meta($object->ID, "textcolor", true); ?>" ></p>
+			<input class="color-field" name="textcolor" value="<?php echo get_post_meta($object->ID, "textcolor", true); ?>" ></p>
 
 			<?php global $post;
 			$frontpage_id = get_option('page_on_front');

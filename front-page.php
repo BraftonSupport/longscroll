@@ -31,8 +31,7 @@ get_header(); ?>
 				echo 'background-image: url(';
 				the_post_thumbnail_url();
 				echo ');';
-			} 
-		?>" class="background<?php
+			} ?>" class="background<?php
 			if ( $video ) { echo ' video'; }
 		?>">
 
@@ -75,8 +74,7 @@ get_header(); ?>
 			$color = get_post_meta( $id, 'textcolor', true );
 			$shadow = get_post_meta( $id, 'shadow', true );
 			?>
-			<section><div id="<?php echo $slug; ?>" class="background"
-			<?php if ( $url || $bg ) {
+			<section><div id="<?php echo $slug; ?>" class="background" <?php if ( $url || $bg ) {
 				echo 'style="';
 					if ( $url ) { echo 'background-image: url('. $url .');'; }
 					if ( $bg ) { echo ' background-color:'. $bg .';'; }

@@ -464,10 +464,7 @@ function yttheme_settings_export() {
 		} else {
 			$options = unserialize(file_get_contents($_FILES["file"]["tmp_name"]));
 			if ($options) {
-				echo $options;
-				foreach ($options as $key => $value) {
-					update_option($key, $value);
-				}
+				update_option("yttheme_options", $options);
 			}
 		}
 		wp_redirect(admin_url('themes.php?page=yttheme_options&tab=import_settings'));

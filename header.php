@@ -39,12 +39,12 @@ if ( $options['ga'] ) : ?>
 
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?>><div id="top"></div>
 	<div id="page" class="site">
 		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'yttheme' ); ?></a>
 
 		<header id="masthead" class="site-header" role="banner">
-			<div class="site-header-main">
+			<div class="site-header-main<?php if ($options['nav'] == 'below') { echo " below"; } ?>">
 				<div class="site-inner container">
 					<div class="site-branding">
 
@@ -90,7 +90,7 @@ if ( $options['ga'] ) : ?>
 					
 				<?php if ($options['nav'] == 'below') { echo "</div></div>"; } ?>
 
-					<div id="site-header-menu" class="site-header-menu<?php if ($options['nav'] == 'below') { echo " below"; } ?>">
+					<div id="site-header-menu" class="site-header-menu">
 
 						<?php if ( has_nav_menu( 'social' ) ) : ?>
 							<nav id="social-navigation" class="social-navigation<?php if ($options['nav'] == 'below') { echo " container"; } ?>" role="navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'yttheme' ); ?>">
