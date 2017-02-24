@@ -24,14 +24,14 @@
 		endif; ?>
 			
 		<div class="site-info"><div class="site-inner container">
-			<?php if ( get_theme_mod( 'yttheme_logo' ) ) { ?>
+			<?php if ( get_theme_mod( 'divingbell_logo' ) ) { ?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<img src='<?php echo esc_url( get_theme_mod( 'yttheme_logo' ) ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' class="site-title">
+					<img src='<?php echo esc_url( get_theme_mod( 'divingbell_logo' ) ); ?>' alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' class="site-title">
 				</a>
 			<?php } ?>
 
 			<?php if ( has_nav_menu( 'social' ) ) : ?>
-				<nav class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'yttheme' ); ?>">
+				<nav class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'divingbell' ); ?>">
 					<?php
 						wp_nav_menu( array(
 							'theme_location' => 'social',
@@ -46,11 +46,11 @@
 
 			<?php
 				/**
-				 * Fires before the yttheme footer text for footer customization.
+				 * Fires before the divingbell footer text for footer customization.
 				 *
 				 * @since Diving Bell 1.0
 				 */
-				do_action( 'yttheme_credits' );
+				do_action( 'divingbell_credits' );
 			?>
 		</div><p class="copyright"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?></a></p>
 		</div><!-- .site-info -->

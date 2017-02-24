@@ -55,18 +55,18 @@ Tags: fluid-layout, responsive-layout, accessibility-ready, two-columns, left-si
   font-family: 'Proxima Nova';
   src: url('fonts/ProximaNova-Reg-webfont.eot'); /* IE9 Compat Modes */
   src: url('fonts/ProximaNova-Reg-webfont?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/ProximaNova-Reg-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/ProximaNova-Reg-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/ProximaNova-Reg-webfont.svg') format('svg'); /* Legacy iOS */
+	   url('fonts/ProximaNova-Reg-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+	   url('fonts/ProximaNova-Reg-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+	   url('fonts/ProximaNova-Reg-webfont.svg') format('svg'); /* Legacy iOS */
 }
 
 @font-face {
 font-family: 'Proxima Nova';
   src: url('fonts/ProximaNova-Reg-webfont.eot'); /* IE9 Compat Modes */
   src: url('fonts/ProximaNova-Reg-webfont?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/ProximaNova-Reg-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/ProximaNova-Reg-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/ProximaNova-Reg-webfont.svg') format('svg'); /* Legacy iOS */
+	   url('fonts/ProximaNova-Reg-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+	   url('fonts/ProximaNova-Reg-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+	   url('fonts/ProximaNova-Reg-webfont.svg') format('svg'); /* Legacy iOS */
 font-weight: normal;
 font-style: normal;
 }
@@ -74,9 +74,9 @@ font-style: normal;
 font-family: 'Proxima Nova';
   src: url('fonts/ProximaNova-RegIt-webfont.eot'); /* IE9 Compat Modes */
   src: url('fonts/ProximaNova-RegIt-webfont?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/ProximaNova-RegIt-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/ProximaNova-RegIt-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/ProximaNova-RegIt-webfont.svg') format('svg'); /* Legacy iOS */
+	   url('fonts/ProximaNova-RegIt-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+	   url('fonts/ProximaNova-RegIt-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+	   url('fonts/ProximaNova-RegIt-webfont.svg') format('svg'); /* Legacy iOS */
 font-weight: normal;
 font-style: italic;
  }
@@ -84,9 +84,9 @@ font-style: italic;
 font-family: 'Proxima Nova';
   src: url('fonts/ProximaNova-Bold-webfont.eot'); /* IE9 Compat Modes */
   src: url('fonts/ProximaNova-Bold-webfont?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/ProximaNova-Bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/ProximaNova-Bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/ProximaNova-Bold-webfont.svg') format('svg'); /* Legacy iOS */
+	   url('fonts/ProximaNova-Bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+	   url('fonts/ProximaNova-Bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+	   url('fonts/ProximaNova-Bold-webfont.svg') format('svg'); /* Legacy iOS */
 font-weight: bold;
 font-style: normal;
 }
@@ -94,9 +94,9 @@ font-style: normal;
 font-family: 'Proxima Nova';
   src: url('fonts/ProximaNova-BoldIt-webfont.eot'); /* IE9 Compat Modes */
   src: url('fonts/ProximaNova-BoldIt-webfont?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('fonts/ProximaNova-BoldIt-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('fonts/ProximaNova-BoldIt-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('fonts/ProximaNova-BoldIt-webfont.svg') format('svg'); /* Legacy iOS */
+	   url('fonts/ProximaNova-BoldIt-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+	   url('fonts/ProximaNova-BoldIt-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+	   url('fonts/ProximaNova-BoldIt-webfont.svg') format('svg'); /* Legacy iOS */
 font-weight: bold;
 font-style: italic;
 }
@@ -828,9 +828,9 @@ a:active,
 	width: 100%;
 	z-index: 999;
 	display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-shadow: 0px 15px 15px -5px rgba(0,0,0,0.25);
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-shadow: 0px 15px 15px -5px rgba(0,0,0,0.25);
 	-moz-box-shadow: 0px 15px 15px -5px rgba(0,0,0,0.25);
 	box-shadow: 0px 15px 15px -5px rgba(0,0,0,0.25);
 }
@@ -845,20 +845,22 @@ a:active,
 .scrolled #site-navigation.site-inner.container { width: 100%; }
 .scrolled .menu-item-has-children > a:after { top: inherit; }
 .scrolled .below .site-inner.container { width: 50%; margin: 0 0 0 auto; }
-
-.menu-toggle { display: block; margin-top: 10px; }
-
 .scrolled .menu-toggle { float: right; margin-top: 5px; }
-
 .scrolled .below { width: 100%;
 	display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+	display: -webkit-flex;
+	display: flex;
 }
 
 .scrolled .below .site-header-menu {
 	margin: 5px auto 5px 0;
 }
+
+.scrolled .site-header-main {
+	width: 100%;
+}
+
+.menu-toggle { display: block; margin-top: 10px; }
 
 .site-header-menu {
 	clear: right;
@@ -920,10 +922,11 @@ a:active,
 }
 
 .main-navigation a {
+	text-align: left;
 	display: block;
 	line-height: 1.3125;
 	outline-offset: -1px;
-	padding: 0 1.7em 0 0;
+	padding: .5em 1.7em;
 	color: #777;
 }
 
@@ -1771,7 +1774,7 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
  */
 
 .site-inner {
-	max-width: 1320px; width: 85%; margin: 0 auto; clear: both;
+	max-width: 1320px; width: 95%; margin: 0 auto; clear: both;
 }
 
 .site-inner .site-inner { width: 100%; }
@@ -1890,21 +1893,21 @@ aside:last-of-type, section:last-of-type { margin-right: 0; }
 }
 
 .teammiddle .previous.button {
-    margin-right: -46px;
+	margin-right: -46px;
 }
 
 .teammiddle .previous.button i {
-    position: relative;
-    right: 22px;
+	position: relative;
+	right: 22px;
 }
 
 .teammiddle .next.button {
-    margin-left: -46px;
+	margin-left: -46px;
 }
 
 .teammiddle .next.button i {
-    position: relative;
-    left: 22px;
+	position: relative;
+	left: 22px;
 }
 
 .teammiddle .fa-spinner {
@@ -2455,20 +2458,20 @@ body:not(.search-results) .entry-summary > :last-child,
 .hero .more-link {
 	margin-top: 10px; 
 	display: table;
-    font-weight: bold;
-    letter-spacing: 0.046875em;
-    line-height: 1;
-    text-transform: uppercase;
-    -webkit-transition: all .3s ease-in-out;
-    -moz-transition: all .3s ease-in-out;
-    -o-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    color: #fff;
-    padding: 15px 25px;
-    border-radius: 26px/50%;
-    -moz-border-radius: 26px/50%;
-    -webkit-border-radius: 26px/50%;
-    background: #007acc;
+	font-weight: bold;
+	letter-spacing: 0.046875em;
+	line-height: 1;
+	text-transform: uppercase;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+	color: #fff;
+	padding: 15px 25px;
+	border-radius: 26px/50%;
+	-moz-border-radius: 26px/50%;
+	-webkit-border-radius: 26px/50%;
+	background: #007acc;
 }
 
 /* Image Rich */
@@ -4351,9 +4354,6 @@ p > video {
 
 	body:not(.search-results) .entry-summary .aligncenter {
 		margin-bottom: 1.5217391304em;
-	}
-	.teammiddle img {
-		width: 250px;
 	}
 }
 

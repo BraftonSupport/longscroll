@@ -8,7 +8,7 @@
  * @subpackage Twenty_Sixteen
  * @since Diving Bell 1.0
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'divingbell_options' );
 
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
@@ -41,21 +41,21 @@ if ( $options['ga'] ) : ?>
 
 <body <?php body_class(); ?>><div id="top"></div>
 	<div id="page" class="site">
-		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'yttheme' ); ?></a>
+		<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'divingbell' ); ?></a>
 
 		<header id="masthead" class="site-header" role="banner">
 			<div class="site-header-main<?php if ($options['nav'] == 'below') { echo " below"; } ?>">
 				<div class="site-inner container">
 					<div class="site-branding">
 
-						<?php if ( get_theme_mod( 'yttheme_logo' ) ) { ?>
+						<?php if ( get_theme_mod( 'divingbell_logo' ) ) { ?>
 							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
 								<?php
 								// set the image url
-								$image_url = esc_url( get_theme_mod( 'yttheme_logo' ) );
+								$image_url = esc_url( get_theme_mod( 'divingbell_logo' ) );
 								 
 								// store the image ID in a var
-								$image_id = yttheme_get_image_id($image_url);
+								$image_id = divingbell_get_image_id($image_url);
 								 
 								// retrieve the thumbnail size of our image
 								$image_thumb = wp_get_attachment_image_src($image_id, 'medium'); ?>
@@ -85,29 +85,14 @@ if ( $options['ga'] ) : ?>
 					}
 					?>
 
-					<button id="menu-toggle" class="menu-toggle"><?php _e( 'Menu', 'yttheme' ); ?></button>
+					<button id="menu-toggle" class="menu-toggle"><?php _e( 'Menu', 'divingbell' ); ?></button>
 
 					
 				<?php if ($options['nav'] == 'below') { echo "</div></div>"; } ?>
 
 					<div id="site-header-menu" class="site-header-menu">
-
-						<?php if ( has_nav_menu( 'social' ) ) : ?>
-							<nav id="social-navigation" class="social-navigation<?php if ($options['nav'] == 'below') { echo " container"; } ?>" role="navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'yttheme' ); ?>">
-								<?php
-									wp_nav_menu( array(
-										'theme_location' => 'social',
-										'menu_class'     => 'social-links-menu',
-										'depth'          => 1,
-										'link_before'    => '<span class="screen-reader-text">',
-										'link_after'     => '</span>',
-									) );
-								?>
-							</nav><!-- .social-navigation -->
-						<?php endif; ?>
-
 						<?php if ( has_nav_menu( 'primary' ) ) : ?>
-							<nav id="site-navigation" class="main-navigation<?php if ($options['nav'] == 'below') { echo " container site-inner"; } ?>" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'yttheme' ); ?>">
+							<nav id="site-navigation" class="main-navigation<?php if ($options['nav'] == 'below') { echo " container site-inner"; } ?>" role="navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'divingbell' ); ?>">
 								<?php
 									wp_nav_menu( array(
 										'theme_location' => 'primary',

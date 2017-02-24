@@ -207,7 +207,7 @@ class feature extends WP_Widget {
 		$title = $instance['title'];
 		$textarea = $instance['textarea'];
 		$image = $instance['image'];
-		$options = get_option( 'yttheme_options' );
+		$options = get_option( 'divingbell_options' );
 
 		echo $before_widget;
 		// Display the widget

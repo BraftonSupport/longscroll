@@ -61,7 +61,7 @@
 		// Add an initial values for the attribute.
 		menuToggle.add( siteNavigation ).add( socialNavigation ).attr( 'aria-expanded', 'false' );
 
-		menuToggle.on( 'click.yttheme', function() {
+		menuToggle.on( 'click.divingbell', function() {
 			$( this ).add( siteHeaderMenu ).toggleClass( 'toggled-on' );
 
 			// jscs:disable
@@ -79,12 +79,12 @@
 		// Toggle `focus` class to allow submenu access on tablets.
 		function toggleFocusClassTouchScreen() {
 			if ( window.innerWidth >= 910 ) {
-				$( document.body ).on( 'touchstart.yttheme', function( e ) {
+				$( document.body ).on( 'touchstart.divingbell', function( e ) {
 					if ( ! $( e.target ).closest( '.main-navigation li' ).length ) {
 						$( '.main-navigation li' ).removeClass( 'focus' );
 					}
 				} );
-				siteNavigation.find( '.menu-item-has-children > a' ).on( 'touchstart.yttheme', function( e ) {
+				siteNavigation.find( '.menu-item-has-children > a' ).on( 'touchstart.divingbell', function( e ) {
 					var el = $( this ).parent( 'li' );
 
 					if ( ! el.hasClass( 'focus' ) ) {
@@ -94,16 +94,16 @@
 					}
 				} );
 			} else {
-				siteNavigation.find( '.menu-item-has-children > a' ).unbind( 'touchstart.yttheme' );
+				siteNavigation.find( '.menu-item-has-children > a' ).unbind( 'touchstart.divingbell' );
 			}
 		}
 
 		if ( 'ontouchstart' in window ) {
-			$( window ).on( 'resize.yttheme', toggleFocusClassTouchScreen );
+			$( window ).on( 'resize.divingbell', toggleFocusClassTouchScreen );
 			toggleFocusClassTouchScreen();
 		}
 
-		siteNavigation.find( 'a' ).on( 'focus.yttheme blur.yttheme', function() {
+		siteNavigation.find( 'a' ).on( 'focus.divingbell blur.divingbell', function() {
 			$( this ).parents( '.menu-item' ).toggleClass( 'focus' );
 		} );
 	} )();
@@ -184,8 +184,8 @@
 		body = $( document.body );
 
 		$( window )
-			.on( 'load.yttheme', onResizeARIA )
-			.on( 'resize.yttheme', function() {
+			.on( 'load.divingbell', onResizeARIA )
+			.on( 'resize.divingbell', function() {
 				clearTimeout( resizeTimer );
 				resizeTimer = setTimeout( function() {
 					belowEntryMetaClass( 'img.size-full' );

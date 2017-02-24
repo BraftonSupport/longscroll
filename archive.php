@@ -46,9 +46,9 @@ get_header(); ?>
 
 			// Previous/next page navigation.
 			the_posts_pagination( array(
-				'prev_text'          => __( 'Previous page', 'yttheme' ),
-				'next_text'          => __( 'Next page', 'yttheme' ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'yttheme' ) . ' </span>',
+				'prev_text'          => __( 'Previous page', 'divingbell' ),
+				'next_text'          => __( 'Next page', 'divingbell' ),
+				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'divingbell' ) . ' </span>',
 			) );
 
 		// If no content, include the "No posts found" template.

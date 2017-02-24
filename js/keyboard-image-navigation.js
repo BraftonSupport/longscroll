@@ -3,7 +3,7 @@
  */
 
 ( function( $ ) {
-	$( document ).on( 'keydown.yttheme', function( e ) {
+	$( document ).on( 'keydown.divingbell', function( e ) {
 		var url = false;
 
 		// Left arrow key code.

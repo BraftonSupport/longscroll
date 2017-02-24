@@ -6,7 +6,7 @@
  * @subpackage Twenty_Sixteen
  * @since Diving Bell 1.0
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'divingbell_options' );
 ?>
 
 <?php if (!is_page() && is_active_sidebar('blog-sidebar')) {

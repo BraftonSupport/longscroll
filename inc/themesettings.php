@@ -140,16 +140,16 @@ function fourth_shortcode( $atts , $content = null ) {
 	return $html;
 }
 
-add_action( 'init', 'yttheme_buttons' );
-function yttheme_buttons() {
-    add_filter( "mce_external_plugins", "yttheme_add_buttons" );
-    add_filter( 'mce_buttons', 'yttheme_register_buttons' );
+add_action( 'init', 'divingbell_buttons' );
+function divingbell_buttons() {
+    add_filter( "mce_external_plugins", "divingbell_add_buttons" );
+    add_filter( 'mce_buttons', 'divingbell_register_buttons' );
 }
-function yttheme_add_buttons( $plugin_array ) {
-    $plugin_array['yttheme'] = get_template_directory_uri() . '/inc/yt-shortcode.js';
+function divingbell_add_buttons( $plugin_array ) {
+    $plugin_array['divingbell'] = get_template_directory_uri() . '/inc/yt-shortcode.js';
     return $plugin_array;
 }
-function yttheme_register_buttons( $buttons ) {
+function divingbell_register_buttons( $buttons ) {
     array_push( $buttons, 'Shortcodes' );
     return $buttons;
 }
@@ -159,21 +159,21 @@ function yttheme_register_buttons( $buttons ) {
 
 /* Adding the logo to the settings page*/
 
-function yttheme_site_options( $wp_customize ) {
-	$wp_customize->add_setting( 'yttheme_logo' );
+function divingbell_site_options( $wp_customize ) {
+	$wp_customize->add_setting( 'divingbell_logo' );
 
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'yttheme_logo', array(
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'divingbell_logo', array(
 	'label' => __( 'Logo' ),
 	'section'  => 'title_tagline',
-	'settings' => 'yttheme_logo',
+	'settings' => 'divingbell_logo',
 	) ) );
 }
 
-add_action('customize_register', 'yttheme_site_options');
+add_action('customize_register', 'divingbell_site_options');
 
 /* Logo size */
 
-function yttheme_get_image_id($image_url) {
+function divingbell_get_image_id($image_url) {
 	global $wpdb;
 	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url )); 
         return $attachment[0]; 
@@ -182,112 +182,112 @@ function yttheme_get_image_id($image_url) {
 /* Enqueuing STUFF!
 -----------------------------------------------------------------*/
 
-function yttheme_scripts() {
+function divingbell_scripts() {
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'js', get_stylesheet_directory_uri(). '/js/js.js', array(), '1.0.0', true );
 	wp_enqueue_style( 'css', get_stylesheet_directory_uri().'/inc/css.css' );
 }
-add_action( 'admin_init', 'yttheme_scripts' );
+add_action( 'admin_init', 'divingbell_scripts' );
 
 
 /* Adding the Menus
 -----------------------------------------------------------------*/
 
-add_action( 'admin_menu', 'yttheme_admin' );
+add_action( 'admin_menu', 'divingbell_admin' );
 
-function yttheme_admin() {
+function divingbell_admin() {
     /* Base Menu */
-    add_theme_page("Diving Bell", "Diving Bell Theme", 'manage_options', 'yttheme_options', 'yttheme_index');
+    add_theme_page("Diving Bell Options", "Diving Bell Theme", 'manage_options', 'divingbell_options', 'divingbell_index');
 }
 
 /* OPTION PAGE SETTINGS 
 -----------------------------------------------------------------*/
 
-add_action('admin_init', 'yttheme_initialize_options');
-function yttheme_initialize_options() {
-	if( false == get_option( 'yttheme_options' ) ) {
-		add_option( 'yttheme_options', apply_filters( 'yttheme_default_options', yttheme_default_options() ) );
+add_action('admin_init', 'divingbell_initialize_options');
+function divingbell_initialize_options() {
+	if( false == get_option( 'divingbell_options' ) ) {
+		add_option( 'divingbell_options', apply_filters( 'divingbell_default_options', divingbell_default_options() ) );
 	} // end if
 	add_settings_section(
 		'options_section',
-		__( 'Options', 'yttheme' ),
-		'yttheme_callback',
-		'yttheme_options'
+		__( 'Options', 'divingbell' ),
+		'divingbell_callback',
+		'divingbell_options'
 	);
 	
 	add_settings_field(
 		'Nav',
-		__( 'Navigation Bar Position', 'yttheme' ),
-		'yttheme_nav_callback',
-		'yttheme_options',
+		__( 'Navigation Bar Position', 'divingbell' ),
+		'divingbell_nav_callback',
+		'divingbell_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Sticky Nav',
-		__( 'Sticky Nav', 'yttheme' ),
-		'yttheme_stickynav_callback',
-		'yttheme_options',
+		__( 'Sticky Nav', 'divingbell' ),
+		'divingbell_stickynav_callback',
+		'divingbell_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Blog Layout',
-		__( 'Blog Layout', 'yttheme' ),
-		'yttheme_blog_layout_callback',
-		'yttheme_options',
+		__( 'Blog Layout', 'divingbell' ),
+		'divingbell_blog_layout_callback',
+		'divingbell_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Related Posts',
-		__( 'Related Posts', 'yttheme' ),
-		'yttheme_related_posts_callback',
-		'yttheme_options',
+		__( 'Related Posts', 'divingbell' ),
+		'divingbell_related_posts_callback',
+		'divingbell_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Google Analytics',
-		__( 'Google Analytics', 'yttheme' ),
-		'yttheme_ga_callback',
-		'yttheme_options',
+		__( 'Google Analytics', 'divingbell' ),
+		'divingbell_ga_callback',
+		'divingbell_options',
 		'options_section'
 	);
 	
 	add_settings_field(
 		'Social Share Buttons',
-		__( 'Social Share Buttons', 'yttheme' ),
-		'yttheme_ss_callback',
-		'yttheme_options',
+		__( 'Social Share Buttons', 'divingbell' ),
+		'divingbell_ss_callback',
+		'divingbell_options',
 		'options_section'
 	);
 
 	register_setting(
-		'yttheme_options',
-		'yttheme_options'
+		'divingbell_options',
+		'divingbell_options'
 	);
 } // end settings field
 
-add_action('admin_init', 'yttheme_initialize_options_export_import');
-function yttheme_initialize_options_export_import() {
+add_action('admin_init', 'divingbell_initialize_options_export_import');
+function divingbell_initialize_options_export_import() {
 	add_settings_section(
 		'options_section_export_import',
-		__( '', 'yttheme' ),
-		'yttheme_callback_export_import',
-		'yttheme_options_export_import'
+		__( '', 'divingbell' ),
+		'divingbell_callback_export_import',
+		'divingbell_options_export_import'
 	);
 
 	register_setting(
-		'yttheme_options_export_import',
-		'yttheme_options_export_import'
+		'divingbell_options_export_import',
+		'divingbell_options_export_import'
 	);
 } // end settings field
 
 /* Register Default Settings
 -----------------------------------------------------------------*/
 
-function yttheme_default_options() {
+function divingbell_default_options() {
 	$defaults = array(
 		'nav'				=>	'',
 		'stickynav'			=>	'',
@@ -302,7 +302,7 @@ function yttheme_default_options() {
 		'ss_pin'			=>	'',
 		'ss_email'			=>	''
 	);
-	return apply_filters( 'yttheme_default_options', $defaults );
+	return apply_filters( 'divingbell_default_options', $defaults );
 }
 
 
@@ -311,8 +311,8 @@ function yttheme_default_options() {
 
 /* Section Callbacks */
 
-	function yttheme_callback() {
-		echo '<p>' . __( 'How do you want your site?', 'yttheme' ) . '</p>';
+	function divingbell_callback() {
+		echo '<p>' . __( 'How do you want your site?', 'divingbell' ) . '</p>';
 	}
 
 
@@ -320,22 +320,22 @@ function yttheme_default_options() {
 
 /* -- Callbacks -- */
 
-	function yttheme_nav_callback() {
-		$options = get_option( 'yttheme_options' );
+	function divingbell_nav_callback() {
+		$options = get_option( 'divingbell_options' );
 		
-		$html = '<select id="nav" name="yttheme_options[nav]">';
-			$html .= '<option value="next"' . selected( $options['nav'], 'next', false) . '>' . __( 'Next to the Logo (75%)', 'yttheme' ) . '</option>';
-			$html .= '<option value="below"' . selected( $options['nav'], 'below', false) . '>' . __( 'Below (100%)', 'yttheme' ) . '</option>';
+		$html = '<select id="nav" name="divingbell_options[nav]">';
+			$html .= '<option value="next"' . selected( $options['nav'], 'next', false) . '>' . __( 'Next to the Logo (75%)', 'divingbell' ) . '</option>';
+			$html .= '<option value="below"' . selected( $options['nav'], 'below', false) . '>' . __( 'Below (100%)', 'divingbell' ) . '</option>';
 			$html .= '</select>';
 			$html .= '<div class="floatimg"><img src="'. get_template_directory_uri() .'/inc/img/next.png"></div>';
 		echo $html;
 	}
 	
-	function yttheme_stickynav_callback() {
-		$options = get_option( 'yttheme_options' );
+	function divingbell_stickynav_callback() {
+		$options = get_option( 'divingbell_options' );
 
 		$sticky = $options['stickynav'];
-			$html .= ' <input type="checkbox" id="stickynav" name="yttheme_options[stickynav]" ';
+			$html .= ' <input type="checkbox" id="stickynav" name="divingbell_options[stickynav]" ';
 			if ($sticky) {
 				$html .= 'checked="checked"';
 			}
@@ -343,88 +343,88 @@ function yttheme_default_options() {
 		echo $html;
 	}
 
-	function yttheme_blog_layout_callback() {
-		$options = get_option( 'yttheme_options' );
+	function divingbell_blog_layout_callback() {
+		$options = get_option( 'divingbell_options' );
 		
-		$html = '<select id="blog_layout" name="yttheme_options[blog_layout]">';
-			$html .= '<option value="hero"' . selected( $options['blog_layout'], 'hero', false) . '>' . __( 'Hero First', 'yttheme' ) . '</option>';
-			$html .= '<option value="rich"' . selected( $options['blog_layout'], 'rich', false) . '>' . __( 'Image Rich', 'yttheme' ) . '</option>';
-			$html .= '<option value="full"' . selected( $options['blog_layout'], 'full', false) . '>' . __( 'Full Card', 'yttheme' ) . '</option>';
-			$html .= '<option value="simple"' . selected( $options['blog_layout'], 'simple', false) . '>' . __( 'Simple Card', 'yttheme' ) . '</option>';
+		$html = '<select id="blog_layout" name="divingbell_options[blog_layout]">';
+			$html .= '<option value="hero"' . selected( $options['blog_layout'], 'hero', false) . '>' . __( 'Hero First', 'divingbell' ) . '</option>';
+			$html .= '<option value="rich"' . selected( $options['blog_layout'], 'rich', false) . '>' . __( 'Image Rich', 'divingbell' ) . '</option>';
+			$html .= '<option value="full"' . selected( $options['blog_layout'], 'full', false) . '>' . __( 'Full Card', 'divingbell' ) . '</option>';
+			$html .= '<option value="simple"' . selected( $options['blog_layout'], 'simple', false) . '>' . __( 'Simple Card', 'divingbell' ) . '</option>';
 			$html .= '</select>';
 			$html .= '<div class="floatimg" style="margin-top:-125px;"><img src="'. get_template_directory_uri() .'/inc/img/bloglayout.jpg"></div>';
 		echo $html;
 	}
 
-	function yttheme_related_posts_callback() {
-		$options = get_option( 'yttheme_options' );
+	function divingbell_related_posts_callback() {
+		$options = get_option( 'divingbell_options' );
 		
-		$html = '<select id="related_posts" name="yttheme_options[related_posts]">';
-			$html .= '<option value="none"' . selected( $options['related_posts'], 'none', false) . '>' . __( 'No related posts', 'yttheme' ) . '</option>';
-			$html .= '<option value="below"' . selected( $options['related_posts'], 'below', false) . '>' . __( 'Below posts', 'yttheme' ) . '</option>';
-			$html .= '<option value="side"' . selected( $options['related_posts'], 'side', false) . '>' . __( 'On the sidebar', 'yttheme' ) . '</option>';
+		$html = '<select id="related_posts" name="divingbell_options[related_posts]">';
+			$html .= '<option value="none"' . selected( $options['related_posts'], 'none', false) . '>' . __( 'No related posts', 'divingbell' ) . '</option>';
+			$html .= '<option value="below"' . selected( $options['related_posts'], 'below', false) . '>' . __( 'Below posts', 'divingbell' ) . '</option>';
+			$html .= '<option value="side"' . selected( $options['related_posts'], 'side', false) . '>' . __( 'On the sidebar', 'divingbell' ) . '</option>';
 			$html .= '</select>';
 		echo $html;
 	}
 
-	function yttheme_ga_callback() {
-		$options = get_option( 'yttheme_options' );
+	function divingbell_ga_callback() {
+		$options = get_option( 'divingbell_options' );
 
 		$ga = '';
 		if( isset( $options['ga'] ) ) {
 			$ga = sanitize_html_class( $options['ga'] );
 		}
 
-		echo '<input type="text" id="ga" name="yttheme_options[ga]" value="' . $ga . '" placeholder="UA-xxxxxxxx-xx" />';
+		echo '<input type="text" id="ga" name="divingbell_options[ga]" value="' . $ga . '" placeholder="UA-xxxxxxxx-xx" />';
 	}
 
-	function yttheme_ss_callback() {
-		$options = get_option( 'yttheme_options' );
+	function divingbell_ss_callback() {
+		$options = get_option( 'divingbell_options' );
 
 		$ssbutton = $options['ssbutton'];
-			$html .= '<input type="checkbox" id="ssbutton" name="yttheme_options[ssbutton]"';
+			$html .= '<input type="checkbox" id="ssbutton" name="divingbell_options[ssbutton]"';
 			if ($ssbutton) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Social Share Buttons?<p class="ss" style="display:none">';
 
 		$facebook = $options['ss_fb'];
-			$html .= ' <input type="checkbox" id="ss_fb" name="yttheme_options[ss_fb]"';
+			$html .= ' <input type="checkbox" id="ss_fb" name="divingbell_options[ss_fb]"';
 			if ($facebook) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Facebook? &nbsp; &nbsp;';
 
 		$twitter = $options['ss_tw'];
-			$html .= ' <input type="checkbox" id="ss_tw" name="yttheme_options[ss_tw]"';
+			$html .= ' <input type="checkbox" id="ss_tw" name="divingbell_options[ss_tw]"';
 			if ($twitter) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Twitter? &nbsp; &nbsp;';
 
 		$gplus = $options['ss_gp'];
-			$html .= ' <input type="checkbox" id="ss_gp" name="yttheme_options[ss_gp]"';
+			$html .= ' <input type="checkbox" id="ss_gp" name="divingbell_options[ss_gp]"';
 			if ($gplus) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Google+? &nbsp; &nbsp;';
 
 		$linkedin = $options['ss_li'];
-			$html .= ' <input type="checkbox" id="ss_li" name="yttheme_options[ss_li]"';
+			$html .= ' <input type="checkbox" id="ss_li" name="divingbell_options[ss_li]"';
 			if ($linkedin) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> LinkedIn? &nbsp; &nbsp;';
 
 		$pinterest = $options['ss_pin'];
-			$html .= ' <input type="checkbox" id="ss_pin" name="yttheme_options[ss_pin]"';
+			$html .= ' <input type="checkbox" id="ss_pin" name="divingbell_options[ss_pin]"';
 			if ($pinterest) {
 				$html .= 'checked="checked"';
 			}
 			$html .= '> Pinterest? &nbsp; &nbsp;';
 
 		$email = $options['ss_email'];
-			$html .= ' <input type="checkbox" id="ss_email" name="yttheme_options[ss_email]"';
+			$html .= ' <input type="checkbox" id="ss_email" name="divingbell_options[ss_email]"';
 			if ($email) {
 				$html .= 'checked="checked"';
 			}
@@ -433,15 +433,15 @@ function yttheme_default_options() {
 
 	}
 
-	function yttheme_callback_export_import() {?>
+	function divingbell_callback_export_import() {?>
 		<h4>Backup/Export</h4>
 		<p>Here are the stored settings for the current theme:</p>
-		<p><textarea class="code" rows="5" cols="100" onclick="this.select()"><?php echo serialize(get_option( 'yttheme_options' )); ?></textarea></p>
-		<p><a href="?page=yttheme_options&tab=import_settings&action=download" class="button-secondary">Download as file</a></p>
+		<p><textarea class="code" rows="5" cols="100" onclick="this.select()"><?php echo serialize(get_option( 'divingbell_options' )); ?></textarea></p>
+		<p><a href="?page=divingbell_options&tab=import_settings&action=download" class="button-secondary">Download as file</a></p>
 		<h4>Restore/Import</h4>
 		<p><label class="description" for="upload">Restore a previous backup</label></p>
 		<p><input type="file" name="file" /> <input type="submit" name="upload" id="upload" class="button-primary" value="Upload file" /></p>
-		<?php if (function_exists('wp_nonce_field')) wp_nonce_field('yttheme_restoreOptions', 'yttheme_restoreOptions'); ?>
+		<?php if (function_exists('wp_nonce_field')) wp_nonce_field('divingbell_restoreOptions', 'divingbell_restoreOptions'); ?>
 	<?php
 	}
 
@@ -450,28 +450,28 @@ function yttheme_default_options() {
 /* Import/Export Settings thingum
 -----------------------------------------------------------------*/
 
-function yttheme_settings_export() {
+function divingbell_settings_export() {
 	if (isset($_GET['action']) && ($_GET['action'] == 'download')) {
 		header("Cache-Control: public, must-revalidate");
 		header("Pragma: hack");
 		header("Content-Type: text/plain");
 		header('Content-Disposition: attachment; filename="theme-options-'.date("dMy").'.dat"');
-		echo serialize(get_option( 'yttheme_options' ));
+		echo serialize(get_option( 'divingbell_options' ));
 		die();
 	}
-	if (isset($_POST['upload']) && check_admin_referer('yttheme_restoreOptions', 'yttheme_restoreOptions')) {
+	if (isset($_POST['upload']) && check_admin_referer('divingbell_restoreOptions', 'divingbell_restoreOptions')) {
 		if ($_FILES["file"]["error"] > 0) {
 		} else {
 			$options = unserialize(file_get_contents($_FILES["file"]["tmp_name"]));
 			if ($options) {
-				update_option("yttheme_options", $options);
+				update_option("divingbell_options", $options);
 			}
 		}
-		wp_redirect(admin_url('themes.php?page=yttheme_options&tab=import_settings'));
+		wp_redirect(admin_url('themes.php?page=divingbell_options&tab=import_settings'));
 		exit;
 	}
 }
-add_action( 'admin_init', 'yttheme_settings_export' );
+add_action( 'admin_init', 'divingbell_settings_export' );
 
 
 
@@ -482,13 +482,13 @@ add_action( 'admin_init', 'yttheme_settings_export' );
 /**
  * Renders a simple page to display for the theme menu defined above.
  */
-function yttheme_index() {
+function divingbell_index() {
 ?>
 
 	<!-- Create a header in the default WordPress 'wrap' container -->
 	<div class="wrap">
 
-		<h2><?php _e( 'Diving Bell Theme Options', 'yttheme' ); ?></h2>
+		<h2><?php _e( 'Diving Bell Theme Options', 'divingbell' ); ?></h2>
 		<?php settings_errors(); ?>
 		
 		<?php if( isset( $_GET[ 'tab' ] ) ) {
@@ -502,20 +502,20 @@ function yttheme_index() {
 		} // end if/else ?>
 
 		<h2 class="nav-tab-wrapper">
-			<a href="?page=yttheme_options&tab=display_options" class="nav-tab <?php echo $active_tab == 'display_options' ? 'nav-tab-active' : ''; ?>">Theme Options</a>
-			<a href="?page=yttheme_options&tab=import_settings" class="nav-tab <?php echo $active_tab == 'import_settings' ? 'nav-tab-active' : ''; ?>">Options Export/Import</a>
- 			<a href="?page=yttheme_options&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode Guide</a>
+			<a href="?page=divingbell_options&tab=display_options" class="nav-tab <?php echo $active_tab == 'display_options' ? 'nav-tab-active' : ''; ?>">Theme Options</a>
+			<a href="?page=divingbell_options&tab=import_settings" class="nav-tab <?php echo $active_tab == 'import_settings' ? 'nav-tab-active' : ''; ?>">Options Export/Import</a>
+ 			<a href="?page=divingbell_options&tab=shortcode" class="nav-tab <?php echo $active_tab == 'shortcode' ? 'nav-tab-active' : ''; ?>">Shortcode Guide</a>
 		</h2>
 
 		<form method="post" action="options.php"<?php if( $active_tab == 'import_settings' ) { echo ' enctype="multipart/form-data"'; } ?> >
 		<?php
 			if( $active_tab == 'display_options' ) {
-				settings_fields( 'yttheme_options' );
-				do_settings_sections( 'yttheme_options' );
+				settings_fields( 'divingbell_options' );
+				do_settings_sections( 'divingbell_options' );
 				submit_button();
 			} else if( $active_tab == 'import_settings' ) {
-				settings_fields( 'yttheme_options_export_import' );
-				do_settings_sections( 'yttheme_options_export_import' );
+				settings_fields( 'divingbell_options_export_import' );
+				do_settings_sections( 'divingbell_options_export_import' );
 			} else { ?>
 				<h2>Team Shortcode</h2>
 					<pre>[team]</pre>

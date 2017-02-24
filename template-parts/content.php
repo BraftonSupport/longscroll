@@ -6,31 +6,31 @@
  * @subpackage Twenty_Sixteen
  * @since Diving Bell 1.0
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'divingbell_options' );
 $blog = $options['blog_layout'];
 $thumbnail = get_the_post_thumbnail_url();
 ?>
 	<article id="post-<?php the_ID(); ?>"<?php post_class($blog); if ($blog=="rich") { ?> style="background-image: url(<?php echo $thumbnail; ?>);"<?php } ?>>
 
-		<?php if ($blog!=="rich") { yttheme_post_thumbnail(); } ?>
+		<?php if ($blog!=="rich") { divingbell_post_thumbnail(); } ?>
 
 		<div class="entry-content">
 
 			<header class="entry-header">
 				<?php if ( is_sticky() && is_home() && ! is_paged() ) : ?>
-					<span class="sticky-post"><?php _e( 'Featured', 'yttheme' ); ?></span>
+					<span class="sticky-post"><?php _e( 'Featured', 'divingbell' ); ?></span>
 				<?php endif; ?>
 
 				<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 			</header><!-- .entry-header -->
 
 			<footer class="entry-footer">
-				<?php yttheme_entry_meta(); ?>
+				<?php divingbell_entry_meta(); ?>
 				<?php
 					edit_post_link(
 						sprintf(
 							/* translators: %s: Name of current post */
-							__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'yttheme' ),
+							__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'divingbell' ),
 							get_the_title()
 						),
 						'<span class="edit-link">',
@@ -41,16 +41,16 @@ $thumbnail = get_the_post_thumbnail_url();
 			<?php
 				/* translators: %s: Name of current post */
 				the_excerpt( sprintf(
-					__( '<p>Continue reading<span class="screen-reader-text"> "%s"</span></p>', 'yttheme' ),
+					__( '<p>Continue reading<span class="screen-reader-text"> "%s"</span></p>', 'divingbell' ),
 					get_the_title()
 				) );
 
 				wp_link_pages( array(
-					'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'yttheme' ) . '</span>',
+					'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'divingbell' ) . '</span>',
 					'after'       => '</div>',
 					'link_before' => '<span>',
 					'link_after'  => '</span>',
-					'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'yttheme' ) . ' </span>%',
+					'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'divingbell' ) . ' </span>%',
 					'separator'   => '<span class="screen-reader-text">, </span>',
 				) );
 			?>

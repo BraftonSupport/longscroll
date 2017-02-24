@@ -16,12 +16,12 @@ if ( version_compare( $GLOBALS['wp_version'], '4.4-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 }
 
-if ( ! function_exists( 'yttheme_setup' ) ) :
+if ( ! function_exists( 'divingbell_setup' ) ) :
 
 
-function yttheme_setup() {
+function divingbell_setup() {
 
-	load_theme_textdomain( 'yttheme', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'divingbell', get_template_directory() . '/languages' );
 
 	add_theme_support( 'automatic-feed-links' );
 
@@ -32,8 +32,8 @@ function yttheme_setup() {
 
 	// This theme uses wp_nav_menu() in two locations.
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'yttheme' ),
-		'social'  => __( 'Social Links Menu', 'yttheme' ),
+		'primary' => __( 'Primary Menu', 'divingbell' ),
+		'social'  => __( 'Social Links Menu', 'divingbell' ),
 	) );
 
 	add_theme_support( 'html5', array(
@@ -56,23 +56,23 @@ function yttheme_setup() {
 		'chat',
 	) );
 
-	add_editor_style( array( 'css/editor-style.css', yttheme_fonts_url() ) );
+	add_editor_style( array( 'css/editor-style.css', divingbell_fonts_url() ) );
 }
-endif; // yttheme_setup
-add_action( 'after_setup_theme', 'yttheme_setup' );
+endif; // divingbell_setup
+add_action( 'after_setup_theme', 'divingbell_setup' );
 
-function yttheme_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'yttheme_content_width', 840 );
+function divingbell_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'divingbell_content_width', 840 );
 }
-add_action( 'after_setup_theme', 'yttheme_content_width', 0 );
+add_action( 'after_setup_theme', 'divingbell_content_width', 0 );
 
 /**
  * Register widget areas.
  */
-function yttheme_widgets_init() {
+function divingbell_widgets_init() {
 
 	register_sidebar( array(
-		'name'		  => __( 'Blog Sidebar', 'yttheme' ),
+		'name'		  => __( 'Blog Sidebar', 'divingbell' ),
 		'id'			=> 'blog-sidebar',
 		'description'   => __( 'Appears on blog and blog posts in the sidebar.' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
@@ -82,7 +82,7 @@ function yttheme_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'		  => __( 'Header', 'yttheme' ),
+		'name'		  => __( 'Header', 'divingbell' ),
 		'id'			=> 'header',
 		'description'   => 'This is located in the header area. Only 1 widget pls.',
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
@@ -92,7 +92,7 @@ function yttheme_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'		  => __( 'Footer', 'yttheme' ),
+		'name'		  => __( 'Footer', 'divingbell' ),
 		'id'			=> 'footer',
 		'description'   => 'This is located in the footer. Use up to 4 widgets.',
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
@@ -102,7 +102,7 @@ function yttheme_widgets_init() {
 	) );
 
 }
-add_action( 'widgets_init', 'yttheme_widgets_init' );
+add_action( 'widgets_init', 'divingbell_widgets_init' );
 
 
 /**
@@ -121,33 +121,33 @@ function excerpt($limit) {
 }
 
 
-if ( ! function_exists( 'yttheme_fonts_url' ) ) :
+if ( ! function_exists( 'divingbell_fonts_url' ) ) :
 /**
  * Register Google fonts for Diving Bell.
  *
- * Create your own yttheme_fonts_url() function to override in a child theme.
+ * Create your own divingbell_fonts_url() function to override in a child theme.
  *
  * @since Diving Bell 1.0
  *
  * @return string Google fonts URL for the theme.
  */
-function yttheme_fonts_url() {
+function divingbell_fonts_url() {
 	$fonts_url = '';
 	$fonts	 = array();
 	$subsets   = 'latin,latin-ext';
 
 	/* translators: If there are characters in your language that are not supported by Merriweather, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'yttheme' ) ) {
+	if ( 'off' !== _x( 'on', 'Merriweather font: on or off', 'divingbell' ) ) {
 		$fonts[] = 'Merriweather:400,700,900,400italic,700italic,900italic';
 	}
 
 	/* translators: If there are characters in your language that are not supported by Montserrat, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Montserrat font: on or off', 'yttheme' ) ) {
+	if ( 'off' !== _x( 'on', 'Montserrat font: on or off', 'divingbell' ) ) {
 		$fonts[] = 'Montserrat:400,700';
 	}
 
 	/* translators: If there are characters in your language that are not supported by Inconsolata, translate this to 'off'. Do not translate into your own language. */
-	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'yttheme' ) ) {
+	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'divingbell' ) ) {
 		$fonts[] = 'Inconsolata:400';
 	}
 
@@ -167,77 +167,77 @@ endif;
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
  */
-function yttheme_javascript_detection() {
+function divingbell_javascript_detection() {
 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 }
-add_action( 'wp_head', 'yttheme_javascript_detection', 0 );
+add_action( 'wp_head', 'divingbell_javascript_detection', 0 );
 
 
 /**
  * Enqueue all the things!
  */
-function yttheme_enqueuingallthethings() {
+function divingbell_enqueuingallthethings() {
 
 	// Jquerying?
 	wp_enqueue_script('jquery');
 
 	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'yttheme-fonts', yttheme_fonts_url(), array(), null );
+	wp_enqueue_style( 'divingbell-fonts', divingbell_fonts_url(), array(), null );
 
 	// Add Genericons and fontawesome, used in the main stylesheet.
 	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '3.4.1' );
 	wp_enqueue_style( 'font-awesome.min', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 
 	// Theme stylesheet.
-	wp_enqueue_style( 'yttheme-style', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'divingbell-style', get_template_directory_uri() . '/style.css' );
 
 	// Fancybox!
 	wp_enqueue_style( 'fancybox', get_template_directory_uri() . '/js/fancybox.css' );
 	wp_enqueue_script( 'fancybox', get_template_directory_uri() . '/js/fancybox.js');
 
 	// Load the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'yttheme-ie', get_template_directory_uri() . '/css/ie.css', array( 'yttheme-style' ), '20150930' );
-	wp_style_add_data( 'yttheme-ie', 'conditional', 'lt IE 10' );
+	wp_enqueue_style( 'divingbell-ie', get_template_directory_uri() . '/css/ie.css', array( 'divingbell-style' ), '20150930' );
+	wp_style_add_data( 'divingbell-ie', 'conditional', 'lt IE 10' );
 
 	// Load the Internet Explorer 8 specific stylesheet.
-	wp_enqueue_style( 'yttheme-ie8', get_template_directory_uri() . '/css/ie8.css', array( 'yttheme-style' ), '20151230' );
-	wp_style_add_data( 'yttheme-ie8', 'conditional', 'lt IE 9' );
+	wp_enqueue_style( 'divingbell-ie8', get_template_directory_uri() . '/css/ie8.css', array( 'divingbell-style' ), '20151230' );
+	wp_style_add_data( 'divingbell-ie8', 'conditional', 'lt IE 9' );
 
 	// Load the Internet Explorer 7 specific stylesheet.
-	wp_enqueue_style( 'yttheme-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'yttheme-style' ), '20150930' );
-	wp_style_add_data( 'yttheme-ie7', 'conditional', 'lt IE 8' );
+	wp_enqueue_style( 'divingbell-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'divingbell-style' ), '20150930' );
+	wp_style_add_data( 'divingbell-ie7', 'conditional', 'lt IE 8' );
 
 	// Load the html5 shiv.
-	wp_enqueue_script( 'yttheme-html5', get_template_directory_uri() . '/js/html5.js', array(), '3.7.3' );
-	wp_script_add_data( 'yttheme-html5', 'conditional', 'lt IE 9' );
+	wp_enqueue_script( 'divingbell-html5', get_template_directory_uri() . '/js/html5.js', array(), '3.7.3' );
+	wp_script_add_data( 'divingbell-html5', 'conditional', 'lt IE 9' );
 
-	wp_enqueue_script( 'yttheme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151112', true );
+	wp_enqueue_script( 'divingbell-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151112', true );
 
 	if ( is_singular() && wp_attachment_is_image() ) {
-		wp_enqueue_script( 'yttheme-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20151104' );
+		wp_enqueue_script( 'divingbell-keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20151104' );
 	}
 
-	wp_enqueue_script( 'yttheme-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20151204', true );
+	wp_enqueue_script( 'divingbell-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20151204', true );
 
-	wp_localize_script( 'yttheme-script', 'screenReaderText', array(
-		'expand'   => __( 'expand child menu', 'yttheme' ),
-		'collapse' => __( 'collapse child menu', 'yttheme' ),
+	wp_localize_script( 'divingbell-script', 'screenReaderText', array(
+		'expand'   => __( 'expand child menu', 'divingbell' ),
+		'collapse' => __( 'collapse child menu', 'divingbell' ),
 	) );
 	
-	$options = get_option( 'yttheme_options' );
+	$options = get_option( 'divingbell_options' );
 	if ( $options['stickynav'] ) {
 		wp_enqueue_script( 'sticky', get_template_directory_uri() . '/js/sticky.js', array(), '1.0.0', true );
 	}
 
 	wp_enqueue_script( 'theme', get_template_directory_uri() . '/js/theme.js', array(), '1.0.0', true );
 }
-add_action( 'wp_enqueue_scripts', 'yttheme_enqueuingallthethings' );
+add_action( 'wp_enqueue_scripts', 'divingbell_enqueuingallthethings' );
 
 
 /**
  * Adds custom classes to the array of body classes.
  */
-function yttheme_body_classes( $classes ) {
+function divingbell_body_classes( $classes ) {
 	// Adds a class of custom-background-image to sites with a custom background image.
 	if ( get_background_image() ) {
 		$classes[] = 'custom-background-image';
@@ -255,12 +255,12 @@ function yttheme_body_classes( $classes ) {
 
 	return $classes;
 }
-add_filter( 'body_class', 'yttheme_body_classes' );
+add_filter( 'body_class', 'divingbell_body_classes' );
 
 /**
  * Converts a HEX value to RGB.
  */
-function yttheme_hex2rgb( $color ) {
+function divingbell_hex2rgb( $color ) {
 	$color = trim( $color, '#' );
 
 	if ( strlen( $color ) === 3 ) {
@@ -292,7 +292,7 @@ require get_template_directory() . '/inc/customizer.php';
  * Add custom image sizes attribute to enhance responsive image functionality
  * for content images
  */
-function yttheme_content_image_sizes_attr( $sizes, $size ) {
+function divingbell_content_image_sizes_attr( $sizes, $size ) {
 	$width = $size[0];
 
 	840 <= $width && $sizes = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px';
@@ -306,21 +306,21 @@ function yttheme_content_image_sizes_attr( $sizes, $size ) {
 
 	return $sizes;
 }
-add_filter( 'wp_calculate_image_sizes', 'yttheme_content_image_sizes_attr', 10 , 2 );
+add_filter( 'wp_calculate_image_sizes', 'divingbell_content_image_sizes_attr', 10 , 2 );
 
 /**
  * Add custom image sizes attribute to enhance responsive image functionality
  */
-function yttheme_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
+function divingbell_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
 	if ( 'post-thumbnail' === $size ) {
 		is_active_sidebar( 'sidebar-1' ) && $attr['sizes'] = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 984px) 60vw, (max-width: 1362px) 62vw, 840px';
 		! is_active_sidebar( 'sidebar-1' ) && $attr['sizes'] = '(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 88vw, 1200px';
 	}
 	return $attr;
 }
-add_filter( 'wp_get_attachment_image_attributes', 'yttheme_post_thumbnail_sizes_attr', 10 , 3 );
+add_filter( 'wp_get_attachment_image_attributes', 'divingbell_post_thumbnail_sizes_attr', 10 , 3 );
 
-function yttheme_post_thumbnail() {
+function divingbell_post_thumbnail() {
 	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 		return;
 	}
@@ -344,20 +344,20 @@ function yttheme_post_thumbnail() {
 /**
  * Modifies tag cloud widget arguments to have all tags in the widget same font size.
  */
-function yttheme_widget_tag_cloud_args( $args ) {
+function divingbell_widget_tag_cloud_args( $args ) {
 	$args['largest'] = 1;
 	$args['smallest'] = 1;
 	$args['unit'] = 'em';
 	return $args;
 }
-add_filter( 'widget_tag_cloud_args', 'yttheme_widget_tag_cloud_args' );
+add_filter( 'widget_tag_cloud_args', 'divingbell_widget_tag_cloud_args' );
 
 
 
 /**
  * What it says on the tin.
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'divingbell_options' );
 if ( $options['ssbutton'] ) {
 	function social_sharing_buttons($content) {
 		// if(is_single()){
@@ -380,7 +380,7 @@ if ( $options['ssbutton'] ) {
 
 			// Add sharing button at the end of page/page content
 			$variable .= '<div class="ssb-social"><span>Social Share:</span>';
-			$options = get_option( 'yttheme_options' );
+			$options = get_option( 'divingbell_options' );
 			if ( $options['ss_fb'] ) { $variable .= '<a class="ssb-facebook" href="'.$facebookURL.'" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>'; }
 			if ( $options['ss_tw'] ) { $variable .= '<a class="ssb-twitter" href="'. $twitterURL .'" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>'; }
 			if ( $options['ss_gp'] ) { $variable .= '<a class="ssb-googleplus" href="'.$googleURL.'" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>'; }

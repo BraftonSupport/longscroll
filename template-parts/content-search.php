@@ -13,19 +13,19 @@
 		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php yttheme_post_thumbnail(); ?>
+	<?php divingbell_post_thumbnail(); ?>
 
-	<?php yttheme_excerpt(); ?>
+	<?php divingbell_excerpt(); ?>
 
 	<?php if ( 'post' === get_post_type() ) : ?>
 
 		<footer class="entry-footer">
-			<?php yttheme_entry_meta(); ?>
+			<?php divingbell_entry_meta(); ?>
 			<?php
 				edit_post_link(
 					sprintf(
 						/* translators: %s: Name of current post */
-						__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'yttheme' ),
+						__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'divingbell' ),
 						get_the_title()
 					),
 					'<span class="edit-link">',
@@ -40,7 +40,7 @@
 			edit_post_link(
 				sprintf(
 					/* translators: %s: Name of current post */
-					__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'yttheme' ),
+					__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'divingbell' ),
 					get_the_title()
 				),
 				'<footer class="entry-footer"><span class="edit-link">',

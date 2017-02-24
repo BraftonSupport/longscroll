@@ -3,12 +3,12 @@
  */
 
 ( function( $ ) {
-	var style = $( '#yttheme-color-scheme-css' ),
+	var style = $( '#divingbell-color-scheme-css' ),
 		api = wp.customize;
 
 	if ( ! style.length ) {
-		style = $( 'head' ).append( '<style type="text/css" id="yttheme-color-scheme-css" />' )
-		                    .find( '#yttheme-color-scheme-css' );
+		style = $( 'head' ).append( '<style type="text/css" id="divingbell-color-scheme-css" />' )
+		                    .find( '#divingbell-color-scheme-css' );
 	}
 
 	// Site title.

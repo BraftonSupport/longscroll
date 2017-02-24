@@ -26,16 +26,16 @@ get_header(); ?>
 			if ( is_singular( 'attachment' ) ) {
 				// Parent post navigation.
 				the_post_navigation( array(
-					'prev_text' => _x( '<span class="meta-nav">Published in</span><span class="post-title">%title</span>', 'Parent post link', 'yttheme' ),
+					'prev_text' => _x( '<span class="meta-nav">Published in</span><span class="post-title">%title</span>', 'Parent post link', 'divingbell' ),
 				) );
 			} elseif ( is_singular( 'post' ) ) {
 				// Previous/next post navigation.
 				the_post_navigation( array(
-					'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next', 'yttheme' ) . '</span> ' .
-						'<span class="screen-reader-text">' . __( 'Next post:', 'yttheme' ) . '</span> ' .
+					'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next', 'divingbell' ) . '</span> ' .
+						'<span class="screen-reader-text">' . __( 'Next post:', 'divingbell' ) . '</span> ' .
 						'<span class="post-title">%title</span>',
-					'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Previous', 'yttheme' ) . '</span> ' .
-						'<span class="screen-reader-text">' . __( 'Previous post:', 'yttheme' ) . '</span> ' .
+					'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Previous', 'divingbell' ) . '</span> ' .
+						'<span class="screen-reader-text">' . __( 'Previous post:', 'divingbell' ) . '</span> ' .
 						'<span class="post-title">%title</span>',
 				) );
 			}

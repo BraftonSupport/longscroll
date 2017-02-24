@@ -6,7 +6,7 @@
  * @subpackage Twenty_Sixteen
  * @since Diving Bell 1.0
  */
-$options = get_option( 'yttheme_options' );
+$options = get_option( 'divingbell_options' );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -14,20 +14,20 @@ $options = get_option( 'yttheme_options' );
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php yttheme_excerpt(); ?>
+	<?php divingbell_excerpt(); ?>
 
-	<?php yttheme_post_thumbnail('full'); ?>
+	<?php divingbell_post_thumbnail('full'); ?>
 
 	<div class="entry-content">
 		<?php
 			the_content();
 
 			wp_link_pages( array(
-				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'yttheme' ) . '</span>',
+				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'divingbell' ) . '</span>',
 				'after'       => '</div>',
 				'link_before' => '<span>',
 				'link_after'  => '</span>',
-				'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'yttheme' ) . ' </span>%',
+				'pagelink'    => '<span class="screen-reader-text">' . __( 'Page', 'divingbell' ) . ' </span>%',
 				'separator'   => '<span class="screen-reader-text">, </span>',
 			) );
 
@@ -38,12 +38,12 @@ $options = get_option( 'yttheme_options' );
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php yttheme_entry_meta(); ?>
+		<?php divingbell_entry_meta(); ?>
 		<?php
 			edit_post_link(
 				sprintf(
 					/* translators: %s: Name of current post */
-					__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'yttheme' ),
+					__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'divingbell' ),
 					get_the_title()
 				),
 				'<span class="edit-link">',

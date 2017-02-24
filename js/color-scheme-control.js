@@ -5,7 +5,7 @@
  */
 
 ( function( api ) {
-	var cssTemplate = wp.template( 'yttheme-color-scheme' ),
+	var cssTemplate = wp.template( 'divingbell-color-scheme' ),
 		colorSchemeKeys = [
 			'background_color',
 			'main_text_color',
